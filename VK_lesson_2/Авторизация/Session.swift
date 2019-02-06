@@ -10,6 +10,7 @@ import Foundation
 class Session{
     var token: String
     var userid: Int
+  
     init(token:String, userid:Int) {
         self.token = token
         self.userid = userid
