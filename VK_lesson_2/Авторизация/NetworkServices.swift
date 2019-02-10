@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-
+import UIKit
 //Получение списка друзей;
 //Получение фотографий человека;
 //Получение групп текущего пользователя;
@@ -23,7 +23,7 @@ enum typeRequest {
     
 }
 
-class NetWorkServices{
+class NetworkServices{
     
 
     public func sendRequest(type: typeRequest){
@@ -36,7 +36,8 @@ class NetWorkServices{
         let parameters: Parameters = [
             "access_token":Session.instance.token,
             "order":"name",
-            "fields":"city"
+            "fields":"city",
+            "v":"5.85"
             ]
         
         Alamofire.request(url+path, method: .get, parameters:parameters)
@@ -51,7 +52,8 @@ class NetWorkServices{
                 "access_token":Session.instance.token,
                 "owner_id":"-1",
                 "album_id":"wall",
-                "count":"1"
+                "count":"1",
+                "v":"5.85"
             ]
             
             Alamofire.request(url+path, method: .get, parameters:parameters)
@@ -64,7 +66,8 @@ class NetWorkServices{
             let parameters: Parameters = [
                 "access_token":Session.instance.token,
                 "extended":"1",
-                "count":"1"
+                "count":"1",
+                "v":"5.85"
             ]
             
             Alamofire.request(url+path, method: .get, parameters:parameters)
@@ -74,7 +77,8 @@ class NetWorkServices{
         case .getSearchGroups://groups.search
                     let path = "/method/groups.search"
                     let parameters: Parameters = [
-                        "q":""
+                        "q":"",
+                        "v":"5.85"
                     ]
                     
                     Alamofire.request(url+path, method: .get, parameters:parameters)
@@ -85,20 +89,6 @@ class NetWorkServices{
     }
         
     }
-    func getGroups(){
-        let url = "https://api.vk.com"
-        let path = "/method/groups.get"
-        let parameters: Parameters = [
-            "access_token":Session.instance.token,
-            "extended":"1",
-            "count":"1"
-        ]
-        
-        Alamofire.request(url+path, method: .get, parameters:parameters)
-            .responseJSON{response in
-                guard let value = response.value else {return}
-                print(value)}
-    }
-    
+   
     
 }

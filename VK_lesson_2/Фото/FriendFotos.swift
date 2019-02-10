@@ -7,13 +7,16 @@
 //
 
 import UIKit
-
+import Alamofire
 
 class FriendFotos: UIViewController {
 //var foto: [String] = []
 var allFotoOneFriend: [String] = []
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBAction func apiFotos(_ sender: UIBarButtonItem) {
+        getFotos()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
@@ -38,7 +41,24 @@ var allFotoOneFriend: [String] = []
     */
 
     // MARK: UICollectionViewDataSource
-
+func getFotos()  {
+    
+    let url = "https://api.vk.com"
+    let path = "/method/photos.get"
+    let parameters: Parameters = [
+        "access_token":Session.instance.token,
+        "owner_id":"-1",
+        "album_id":"wall",
+        "count":"1",
+        "v":"5.85"
+    ]
+    
+    Alamofire.request(url+path, method: .get, parameters:parameters)
+        .responseJSON{response in
+            guard let value = response.value else {return}
+            print(value)
+    }
+}
 extension FriendFotos: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return allFotoOneFriend.count

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class FriendsTableViewController: UITableViewController {
    
@@ -23,6 +24,10 @@ class FriendsTableViewController: UITableViewController {
   var filteredAllFriends: [String] = []
  var  allFriendsCharacter = [""]
  
+    @IBAction func apiFriends(_ sender: Any) {
+       getFriends()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        setupSearchController()
@@ -34,7 +39,22 @@ class FriendsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    func getFriends()  {
+        let url = "https://api.vk.com"
+        let path = "/method/friends.get"
+        let parameters: Parameters = [
+            "access_token":Session.instance.token,
+            "order":"name",
+            "fields":"city",
+            "v":"5.85"
+        ]
+        
+        Alamofire.request(url+path, method: .get, parameters:parameters)
+            .responseJSON{response in
+                guard let value = response.value else {return}
+                print(value)
+        }
+    }
     func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false

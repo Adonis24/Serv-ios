@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 extension AllGroupsTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
@@ -16,6 +16,12 @@ extension AllGroupsTableViewController: UISearchResultsUpdating {
 }
 class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
  
+    @IBAction func apiSearch(_ sender: Any) {
+        if searchActive{
+       searchGroup()
+        }
+        
+    }
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -29,7 +35,21 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
         super.viewDidLoad()
 
     }
-    
+    func searchGroup()  {
+        
+        let url = "https://api.vk.com"
+        let path = "/method/groups.search"
+        let parameters: Parameters = [
+            "access_token":Session.instance.token,
+            "q":String(searchBar.text!),
+            "v":"5.85"
+        ]
+        
+        Alamofire.request(url+path, method: .get, parameters:parameters)
+            .responseJSON{response in
+                guard let value = response.value else {return}
+                print(value)}
+    }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredAllGroups = allGroups.filter({(text) -> Bool in
             let tmp: NSString = text as NSString

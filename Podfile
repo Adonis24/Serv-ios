@@ -6,5 +6,5 @@ target 'VK_lesson_2' do
   use_frameworks!
 
   # Pods for VK_lesson_2
-pod 'Alamofire'
+pod  'Alamofire', '~> 4.8'
 end

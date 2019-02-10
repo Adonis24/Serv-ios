@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 class GroupTableViewController: UITableViewController {
 
     @IBAction func addGroup(segue: UIStoryboardSegue) {
@@ -38,6 +38,9 @@ class GroupTableViewController: UITableViewController {
     var nameGroups   = ["Актеры","Композиторы","Автомобили"]
     var groups = ["Актеры":"Actors","Композиторы":"Composers","Автомобили":"Сars"]
 
+    @IBAction func apiGroups(_ sender: Any) {
+        getGroups()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +54,21 @@ class GroupTableViewController: UITableViewController {
     
     @IBAction func backAuthGroup(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    func getGroups(){
+        let url = "https://api.vk.com"
+        let path = "/method/groups.get"
+        let parameters: Parameters = [
+            "access_token":Session.instance.token,
+            "extended":"1",
+            "count":"2",
+            "v":"5.85"
+        ]
+        
+        Alamofire.request(url+path, method: .get, parameters:parameters)
+            .responseJSON{response in
+                guard let value = response.value else {return}
+                print(value)}
     }
     
     // MARK: - Table view data source

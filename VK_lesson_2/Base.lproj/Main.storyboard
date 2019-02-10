@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GcO-ca-vEh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,6 +9,41 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Oauth Controller-->
+        <scene sceneID="aAx-H7-lys">
+            <objects>
+                <viewController id="GcO-ca-vEh" customClass="VKOauthController" customModule="VK_lesson_2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ldD-PS-l7G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4I-uL-tJO">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nk7-pL-PK7" firstAttribute="bottom" secondItem="y4I-uL-tJO" secondAttribute="bottom" id="4ho-Q9-IZ5"/>
+                            <constraint firstItem="y4I-uL-tJO" firstAttribute="top" secondItem="nk7-pL-PK7" secondAttribute="top" id="Xxc-KM-05Q"/>
+                            <constraint firstItem="y4I-uL-tJO" firstAttribute="leading" secondItem="nk7-pL-PK7" secondAttribute="leading" id="udY-XK-ea5"/>
+                            <constraint firstItem="nk7-pL-PK7" firstAttribute="trailing" secondItem="y4I-uL-tJO" secondAttribute="trailing" id="z1I-8A-YH1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nk7-pL-PK7"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="y4I-uL-tJO" id="FaY-Oc-xnF"/>
+                        <segue destination="npE-Am-Lk3" kind="presentation" identifier="VKLogin" id="oWm-8L-ESO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OZ7-Y9-Ti6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2372" y="-734"/>
+        </scene>
         <!--Login Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -232,12 +267,19 @@
                                 <action selector="backAuthGroup:" destination="l57-zn-G54" id="rK1-an-2Xq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iZe-Fv-8lg">
-                            <connections>
-                                <action selector="addGroupWithSegue:" destination="l57-zn-G54" id="33J-TF-7Bm"/>
-                                <segue destination="Lvj-JD-nde" kind="show" identifier="addGroup" id="Ufy-AR-iWJ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="iZe-Fv-8lg">
+                                <connections>
+                                    <action selector="addGroupWithSegue:" destination="l57-zn-G54" id="33J-TF-7Bm"/>
+                                    <segue destination="Lvj-JD-nde" kind="show" identifier="addGroup" id="Ufy-AR-iWJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Api" id="o0C-5F-jdg">
+                                <connections>
+                                    <action selector="apiGroups:" destination="l57-zn-G54" id="9qm-fr-f68"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUJ-uy-EVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -336,11 +378,18 @@
                                 <action selector="backAuthFriends:" destination="sHx-ji-JrL" id="t3T-NZ-853"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Далее" id="hL7-PH-UVd">
-                            <connections>
-                                <segue destination="Nhi-No-WMg" kind="show" identifier="allFotoFriend" id="sJ1-tj-HDG"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Далее" id="hL7-PH-UVd">
+                                <connections>
+                                    <segue destination="Nhi-No-WMg" kind="show" identifier="allFotoFriend" id="sJ1-tj-HDG"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Api" id="WrE-SC-KBi">
+                                <connections>
+                                    <action selector="apiFriends:" destination="sHx-ji-JrL" id="QRq-aM-PUy"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="S2y-Pe-agj" id="YRv-Og-LEx"/>
@@ -411,7 +460,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NiM-PD-bRE"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Фотографии" id="ioJ-DT-C89"/>
+                    <navigationItem key="navigationItem" title="Фотографии" id="ioJ-DT-C89">
+                        <barButtonItem key="rightBarButtonItem" title="Api" id="uIu-de-mnF">
+                            <connections>
+                                <action selector="apiFotos:" destination="Nhi-No-WMg" id="foy-y8-fDh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="iBr-43-ib6" id="fYk-Kt-Kw5"/>
                     </connections>
@@ -546,6 +601,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Все группы" id="JWA-16-ce9">
                         <barButtonItem key="backBarButtonItem" title="Назад" id="JVd-L3-O4F"/>
+                        <barButtonItem key="rightBarButtonItem" title="Api" id="hUq-PX-2Ke">
+                            <connections>
+                                <action selector="apiSearch:" destination="Lvj-JD-nde" id="1k4-0s-WRx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="w35-4k-UFa" id="1Da-ck-jjn"/>
@@ -677,4 +737,7 @@
     <resources>
         <image name="Actors" width="1200" height="900"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oWm-8L-ESO"/>
+    </inferredMetricsTieBreakers>
 </document>

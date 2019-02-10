@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VK_lesson_2/&#x413;&#x440;&#x443;&#x43f;&#x43f;&#x44b; &#x434;&#x440;&#x443;&#x437;&#x435;&#x438;&#x306;/GroupTableViewController.swift"
-            timestampString = "570568335.337027"
+            timestampString = "571489144.840222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "GroupTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -73,11 +73,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VK_lesson_2/&#x412;&#x441;&#x435; &#x433;&#x440;&#x443;&#x43f;&#x43f;&#x44b;/AllGroupsTableViewController.swift"
-            timestampString = "570568335.393044"
+            timestampString = "571489144.845975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             condition = "indexPath.row"
             continueAfterRunningActions = "No"
             filePath = "VK_lesson_2/&#x414;&#x440;&#x443;&#x437;&#x44c;&#x44f;/FriendsTableViewController.swift"
-            timestampString = "570895412.882513"
+            timestampString = "571489144.9063309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
             <Actions>
@@ -146,11 +146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VK_lesson_2/&#x414;&#x440;&#x443;&#x437;&#x44c;&#x44f;/FriendsTableViewController.swift"
-            timestampString = "570895412.914157"
+            timestampString = "571489144.907087"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>

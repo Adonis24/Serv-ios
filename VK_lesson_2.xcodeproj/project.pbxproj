@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01193773220F37EB00E47B22 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01193772220F37EB00E47B22 /* NetworkServices.swift */; };
+		01193775220F526000E47B22 /* VKOauthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01193774220F526000E47B22 /* VKOauthController.swift */; };
 		0142442C21DCCD410055095C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142442B21DCCD410055095C /* AppDelegate.swift */; };
 		0142442E21DCCD410055095C /* VKLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142442D21DCCD410055095C /* VKLoginController.swift */; };
 		0142443121DCCD410055095C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0142442F21DCCD410055095C /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01193772220F37EB00E47B22 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		01193774220F526000E47B22 /* VKOauthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKOauthController.swift; sourceTree = "<group>"; };
 		0142442821DCCD410055095C /* VK_lesson_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_lesson_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0142442B21DCCD410055095C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0142442D21DCCD410055095C /* VKLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginController.swift; sourceTree = "<group>"; };
@@ -111,7 +115,7 @@
 				015CB38121EA130300B32CBE /* Фото */,
 				015CB37621EA116900B32CBE /* Все группы */,
 				019B8A2C21E3C8DB009B4F32 /* Друзья */,
-				014AAC0F21E3B17E0048FCBB /* Группы друзей */,
+				014AAC0F21E3B17E0048FCBB /* Группы друзей */,
 				0142442B21DCCD410055095C /* AppDelegate.swift */,
 				0142442F21DCCD410055095C /* Main.storyboard */,
 				0142443221DCCD490055095C /* Assets.xcassets */,
@@ -121,7 +125,7 @@
 			path = VK_lesson_2;
 			sourceTree = "<group>";
 		};
-		014AAC0F21E3B17E0048FCBB /* Группы друзей */ = {
+		014AAC0F21E3B17E0048FCBB /* Группы друзей */ = {
 			isa = PBXGroup;
 			children = (
 				014AAC1021E3B1C50048FCBB /* GroupTableViewController.swift */,
@@ -171,8 +175,10 @@
 			isa = PBXGroup;
 			children = (
 				0142442D21DCCD410055095C /* VKLoginController.swift */,
+				01193774220F526000E47B22 /* VKOauthController.swift */,
 				017AC5432203448700F0F897 /* LoadView.swift */,
 				017AC54C220AEFAA00F0F897 /* Session.swift */,
+				01193772220F37EB00E47B22 /* NetworkServices.swift */,
 			);
 			path = "Авторизация";
 			sourceTree = "<group>";
@@ -208,7 +214,6 @@
 				689EE0098BFD19BF8395AFA2 /* Pods-VK_lesson_2.debug.xcconfig */,
 				A51BDF099CEB3B345782B372 /* Pods-VK_lesson_2.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -339,6 +344,7 @@
 				017AC5322201FFAA00F0F897 /* NewsTableViewCell.swift in Sources */,
 				017AC5392202221600F0F897 /* NewsLikeControl.swift in Sources */,
 				0142442E21DCCD410055095C /* VKLoginController.swift in Sources */,
+				01193773220F37EB00E47B22 /* NetworkServices.swift in Sources */,
 				0142442C21DCCD410055095C /* AppDelegate.swift in Sources */,
 				01EE84A821F47B6A009F6E6E /* CornerAvatar.swift in Sources */,
 				017AC53D2202250200F0F897 /* NewsShareControl.swift in Sources */,
@@ -349,6 +355,7 @@
 				017AC5442203448700F0F897 /* LoadView.swift in Sources */,
 				019B8A2E21E3C90F009B4F32 /* FriendsTableViewController.swift in Sources */,
 				017AC53F2202266600F0F897 /* NewsEyesControl.swift in Sources */,
+				01193775220F526000E47B22 /* VKOauthController.swift in Sources */,
 				017AC52221F5B7C900F0F897 /* LikeControl.swift in Sources */,
 				015CB37C21EA126500B32CBE /* AllGroupsCellTableViewCell.swift in Sources */,
 				015CB38521EA13C000B32CBE /* FriendFotoCell.swift in Sources */,
@@ -503,6 +510,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ALXHT8K73Y;
 				INFOPLIST_FILE = VK_lesson_2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -521,6 +529,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ALXHT8K73Y;
 				INFOPLIST_FILE = VK_lesson_2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
