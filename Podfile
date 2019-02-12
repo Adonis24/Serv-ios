@@ -7,4 +7,6 @@ target 'VK_lesson_2' do
 
   # Pods for VK_lesson_2
 pod  'Alamofire', '~> 4.8'
+  pod 'SwiftyJSON'
+  pod 'Kingfisher'
 end

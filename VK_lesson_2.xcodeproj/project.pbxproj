@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01193773220F37EB00E47B22 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01193772220F37EB00E47B22 /* NetworkServices.swift */; };
 		01193775220F526000E47B22 /* VKOauthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01193774220F526000E47B22 /* VKOauthController.swift */; };
+		0119377722132CB700E47B22 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119377622132CB700E47B22 /* User.swift */; };
 		0142442C21DCCD410055095C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142442B21DCCD410055095C /* AppDelegate.swift */; };
 		0142442E21DCCD410055095C /* VKLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142442D21DCCD410055095C /* VKLoginController.swift */; };
 		0142443121DCCD410055095C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0142442F21DCCD410055095C /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		01193772220F37EB00E47B22 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 		01193774220F526000E47B22 /* VKOauthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKOauthController.swift; sourceTree = "<group>"; };
+		0119377622132CB700E47B22 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0142442821DCCD410055095C /* VK_lesson_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_lesson_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0142442B21DCCD410055095C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0142442D21DCCD410055095C /* VKLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginController.swift; sourceTree = "<group>"; };
@@ -115,17 +117,18 @@
 				015CB38121EA130300B32CBE /* Фото */,
 				015CB37621EA116900B32CBE /* Все группы */,
 				019B8A2C21E3C8DB009B4F32 /* Друзья */,
-				014AAC0F21E3B17E0048FCBB /* Группы друзей */,
+				014AAC0F21E3B17E0048FCBB /* Группы друзей */,
 				0142442B21DCCD410055095C /* AppDelegate.swift */,
 				0142442F21DCCD410055095C /* Main.storyboard */,
 				0142443221DCCD490055095C /* Assets.xcassets */,
 				0142443421DCCD490055095C /* LaunchScreen.storyboard */,
 				0142443721DCCD490055095C /* Info.plist */,
+				0119377622132CB700E47B22 /* User.swift */,
 			);
 			path = VK_lesson_2;
 			sourceTree = "<group>";
 		};
-		014AAC0F21E3B17E0048FCBB /* Группы друзей */ = {
+		014AAC0F21E3B17E0048FCBB /* Группы друзей */ = {
 			isa = PBXGroup;
 			children = (
 				014AAC1021E3B1C50048FCBB /* GroupTableViewController.swift */,
@@ -297,12 +300,16 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-VK_lesson_2/Pods-VK_lesson_2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -338,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0119377722132CB700E47B22 /* User.swift in Sources */,
 				015CB38321EA139F00B32CBE /* FriendFotos.swift in Sources */,
 				01D59DB321F3491D00417539 /* ShadowView.swift in Sources */,
 				017AC53B2202231400F0F897 /* NewsCommentControl.swift in Sources */,

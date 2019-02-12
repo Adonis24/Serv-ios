@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+class User:CustomStringConvertible {
+   var description: String {
+        return "My friend"
+   
+//    let id: Int
+//    let first_name: String
+//    let last_name: String
+//    init(json: JSON) {
+//        
+    }
+    
+}
