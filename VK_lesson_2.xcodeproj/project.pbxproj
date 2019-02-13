@@ -35,6 +35,9 @@
 		017AC54B2206C1E900F0F897 /* GaleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AC54A2206C1E900F0F897 /* GaleryViewController.swift */; };
 		017AC54D220AEFAA00F0F897 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AC54C220AEFAA00F0F897 /* Session.swift */; };
 		019B8A2E21E3C90F009B4F32 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B8A2D21E3C90F009B4F32 /* FriendsTableViewController.swift */; };
+		01AF7079221333D500435B06 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF7078221333D500435B06 /* Photo.swift */; };
+		01AF707B22133EF600435B06 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF707A22133EF600435B06 /* Group.swift */; };
+		01AF707E2213412700435B06 /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF707D2213412700435B06 /* VKService.swift */; };
 		01D59DB321F3491D00417539 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D59DB221F3491D00417539 /* ShadowView.swift */; };
 		01EE84A821F47B6A009F6E6E /* CornerAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE84A721F47B6A009F6E6E /* CornerAvatar.swift */; };
 		7438E031A59B50F969C851EC /* Pods_VK_lesson_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692AEA94E0763A985BA22734 /* Pods_VK_lesson_2.framework */; };
@@ -71,6 +74,9 @@
 		017AC54A2206C1E900F0F897 /* GaleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryViewController.swift; sourceTree = "<group>"; };
 		017AC54C220AEFAA00F0F897 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		019B8A2D21E3C90F009B4F32 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		01AF7078221333D500435B06 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		01AF707A22133EF600435B06 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		01AF707D2213412700435B06 /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		01D59DB221F3491D00417539 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		01EE84A721F47B6A009F6E6E /* CornerAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerAvatar.swift; sourceTree = "<group>"; };
 		689EE0098BFD19BF8395AFA2 /* Pods-VK_lesson_2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_lesson_2.debug.xcconfig"; path = "Target Support Files/Pods-VK_lesson_2/Pods-VK_lesson_2.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,24 +117,24 @@
 		0142442A21DCCD410055095C /* VK_lesson_2 */ = {
 			isa = PBXGroup;
 			children = (
+				01AF707C221340DD00435B06 /* Networking */,
 				017AC5472206C13800F0F897 /* Галерея */,
 				017AC5422203444100F0F897 /* Авторизация */,
 				017AC52321F9EF5B00F0F897 /* Новости */,
 				015CB38121EA130300B32CBE /* Фото */,
 				015CB37621EA116900B32CBE /* Все группы */,
 				019B8A2C21E3C8DB009B4F32 /* Друзья */,
-				014AAC0F21E3B17E0048FCBB /* Группы друзей */,
+				014AAC0F21E3B17E0048FCBB /* Группы друзей */,
 				0142442B21DCCD410055095C /* AppDelegate.swift */,
 				0142442F21DCCD410055095C /* Main.storyboard */,
 				0142443221DCCD490055095C /* Assets.xcassets */,
 				0142443421DCCD490055095C /* LaunchScreen.storyboard */,
 				0142443721DCCD490055095C /* Info.plist */,
-				0119377622132CB700E47B22 /* User.swift */,
 			);
 			path = VK_lesson_2;
 			sourceTree = "<group>";
 		};
-		014AAC0F21E3B17E0048FCBB /* Группы друзей */ = {
+		014AAC0F21E3B17E0048FCBB /* Группы друзей */ = {
 			isa = PBXGroup;
 			children = (
 				014AAC1021E3B1C50048FCBB /* GroupTableViewController.swift */,
@@ -181,7 +187,6 @@
 				01193774220F526000E47B22 /* VKOauthController.swift */,
 				017AC5432203448700F0F897 /* LoadView.swift */,
 				017AC54C220AEFAA00F0F897 /* Session.swift */,
-				01193772220F37EB00E47B22 /* NetworkServices.swift */,
 			);
 			path = "Авторизация";
 			sourceTree = "<group>";
@@ -201,6 +206,18 @@
 				015CB37D21EA12AD00B32CBE /* FriendsTableViewCell.swift */,
 			);
 			path = "Друзья";
+			sourceTree = "<group>";
+		};
+		01AF707C221340DD00435B06 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				01AF707A22133EF600435B06 /* Group.swift */,
+				01AF7078221333D500435B06 /* Photo.swift */,
+				0119377622132CB700E47B22 /* User.swift */,
+				01AF707D2213412700435B06 /* VKService.swift */,
+				01193772220F37EB00E47B22 /* NetworkServices.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		084E0D89C0926A13EB562A5D /* Frameworks */ = {
@@ -348,9 +365,11 @@
 				0119377722132CB700E47B22 /* User.swift in Sources */,
 				015CB38321EA139F00B32CBE /* FriendFotos.swift in Sources */,
 				01D59DB321F3491D00417539 /* ShadowView.swift in Sources */,
+				01AF7079221333D500435B06 /* Photo.swift in Sources */,
 				017AC53B2202231400F0F897 /* NewsCommentControl.swift in Sources */,
 				017AC5322201FFAA00F0F897 /* NewsTableViewCell.swift in Sources */,
 				017AC5392202221600F0F897 /* NewsLikeControl.swift in Sources */,
+				01AF707B22133EF600435B06 /* Group.swift in Sources */,
 				0142442E21DCCD410055095C /* VKLoginController.swift in Sources */,
 				01193773220F37EB00E47B22 /* NetworkServices.swift in Sources */,
 				0142442C21DCCD410055095C /* AppDelegate.swift in Sources */,
@@ -358,6 +377,7 @@
 				017AC53D2202250200F0F897 /* NewsShareControl.swift in Sources */,
 				015CB37A21EA124100B32CBE /* AllGroupsTableViewController.swift in Sources */,
 				017AC54B2206C1E900F0F897 /* GaleryViewController.swift in Sources */,
+				01AF707E2213412700435B06 /* VKService.swift in Sources */,
 				015CB38021EA12EB00B32CBE /* GroupTableViewCell.swift in Sources */,
 				015CB37E21EA12AD00B32CBE /* FriendsTableViewCell.swift in Sources */,
 				017AC5442203448700F0F897 /* LoadView.swift in Sources */,
