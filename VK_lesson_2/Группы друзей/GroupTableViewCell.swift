@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GroupTableViewCell: UITableViewCell {
 
@@ -19,6 +20,13 @@ class GroupTableViewCell: UITableViewCell {
     
     @IBOutlet weak var groupName: UILabel!
     
+    public func configue(with group: Group) {
+        
+        let iconUrlString = group.photo_50
+        groupLogo.kf.setImage(with: URL(string: iconUrlString))
+        groupName.text = group.name
+        
+    }
 //    override func prepareForReuse() {
 //        super.prepareForReuse()
 //        groupName.text = nil

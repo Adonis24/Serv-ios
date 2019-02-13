@@ -26,6 +26,8 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var allGroups = ["Актеры","Композиторы","Автомобили","Спорт","Путешествие","Экстрим","Политика"]
+    private var vkService = VKService()
+    private var groups = [Group]()
     var allGroupsFoto = ["Актеры":"Actors","Композиторы":"Composers","Автомобили":"Сars","Спорт":"Sport","Путешествие":"Travel","Экстрим":"Extrim","Политика":"Polit"]
     let searchController = UISearchController(searchResultsController: nil)
     var filteredAllGroups: [String] = []
@@ -33,6 +35,8 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
 
     }
     func searchGroup()  {
@@ -56,12 +60,7 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
             return range.location != NSNotFound
         })
-        // Filter the data array and get only those countries that match the search text.
-//                filteredAllGroups = allGroups.filter({ (searchText) -> Bool in
-//                    let groupsMatch: NSString = searchText as NSString
-//
-//                    return (groupsMatch.range(of: searchText, options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
-//                })
+
         
         searchActive = true
         tableView.reloadData()

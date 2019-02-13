@@ -37,7 +37,8 @@ class GroupTableViewController: UITableViewController {
     
     var nameGroups   = ["Актеры","Композиторы","Автомобили"]
     var groups = ["Актеры":"Actors","Композиторы":"Composers","Автомобили":"Сars"]
-
+    var vkService = VKService()
+    private var vk_groups = [Group]()
     @IBAction func apiGroups(_ sender: Any) {
         getGroups()
     }
@@ -49,6 +50,34 @@ class GroupTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+//        vkService.getGroup(){ [weak self] groups, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            } else if let groups = groups, let self = self {
+//                self.vk_groups = groups
+//
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        vkService.getGroup(){ [weak self] group, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else if let group = group, let self = self {
+                self.vk_groups = group
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 
     
@@ -80,31 +109,18 @@ class GroupTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return nameGroups.count
+        return vk_groups.count//nameGroups.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as! GroupTableViewCell
-        let name = nameGroups[indexPath.row]
-        let result = groups.filter{(key,value) in key.contains(name) }
+//        let name = nameGroups[indexPath.row]
+//        let result = groups.filter{(key,value) in key.contains(name) }
      
-        cell.groupName.text = result.first?.key
-        cell.groupLogo.image = UIImage(named: result.first?.value ?? "")
-        
-//        let border = UIView()
-//        border.frame = cell.groupLogo.bounds
-//        border.layer.cornerRadius = cell.groupLogo.bounds.height / 2
-//        border.layer.masksToBounds = true
-//        cell.groupLogo.addSubview(border)
-//     
-//        
-//        let newFriendAvatar = UIImageView()
-//        newFriendAvatar.image = UIImage(named: result.first?.value ?? "")
-//        
-//        newFriendAvatar.frame = border.bounds
-//        border.addSubview(newFriendAvatar)
-        
+//        cell.groupName.text = result.first?.key
+//        cell.groupLogo.image = UIImage(named: result.first?.value ?? "")
+         cell.configue(with: vk_groups[indexPath.row])
         return cell
     }
     

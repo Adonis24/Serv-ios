@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AllGroupsCellTableViewCell: UITableViewCell {
 
@@ -22,6 +23,12 @@ class AllGroupsCellTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    public func configue(with group: Group) {
+        
+        let iconUrlString = group.photo_50
+        allGroupLogo.kf.setImage(with: URL(string: iconUrlString))
+        allGroupName.text = group.name
+        
+    }
     
 }
