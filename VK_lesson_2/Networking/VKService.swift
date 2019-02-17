@@ -24,14 +24,16 @@ class VKService {
     
    
     
-    public func getUser(for id: String, completion: (([User]?, Error?) -> Void)? = nil)  {
-        
-        let path = "/method/users.get"
+    public func getFriends(completion: (([User]?, Error?) -> Void)? = nil)  {
+        let extFields = "first_name,last_name,photo_50,photo_100,photo_200,photo_400_orig,deactivated"
+        let path = "/method/friends.get"
         let params: Parameters = [
             "access_token":Session.instance.token,
-            "user_ids": id,
+            "fields": extFields,
+            "order":"name",
             "v":"5.85"
         ]
+        
         
         VKService.sharedManager.request(baseUrl+path, method: .get, parameters: params).responseJSON { response in
             
@@ -39,19 +41,18 @@ class VKService {
                 
             case .success(let value):
                 let json = JSON(value)
-                let users = json["list"].arrayValue.map { User(json: $0) }
+                let users = json["response"]["items"].arrayValue.map { User(json: $0) }
                 completion?(users, nil)
             case .failure(let error):
                 completion?(nil, error)
             }
         }
     }
-    public func getFoto(for id: String, completion: (([Photo]?, Error?) -> Void)? = nil)  {
+    public func getFoto(completion: (([Photo]?, Error?) -> Void)? = nil)  {
         
-        let path = "/method/photos.getById"
+        let path = "/method/photos.getAll"
         let params: Parameters = [
             "access_token":Session.instance.token,
-            "id":id,
             "v":"5.85"
         ]
         
@@ -61,7 +62,7 @@ class VKService {
                 
             case .success(let value):
                 let json = JSON(value)
-                let photos = json["list"].arrayValue.map { Photo(json: $0) }
+                let photos = json["response"]["items"].arrayValue.map { Photo(json: $0) }
                 completion?(photos, nil)
             case .failure(let error):
                 completion?(nil, error)
@@ -76,7 +77,6 @@ class VKService {
         let params: Parameters = [
             "access_token":Session.instance.token,
             "extended":"1",
-            "count":"2",
             "v":"5.85"
         ]
         
@@ -86,7 +86,7 @@ class VKService {
                 
             case .success(let value):
                 let json = JSON(value)
-                let groups = json["items"].arrayValue.map { Group(json: $0) }
+                let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
                 completion?(groups, nil)
             case .failure(let error):
                 completion?(nil, error)

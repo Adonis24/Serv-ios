@@ -147,11 +147,21 @@
                                             <constraint firstItem="9hq-a3-hdH" firstAttribute="height" secondItem="B9J-5g-ydt" secondAttribute="height" id="pqT-eL-rPN"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBG-lc-E99">
+                                        <rect key="frame" x="50" y="406.5" width="275" height="30"/>
+                                        <state key="normal" title="Exit"/>
+                                        <connections>
+                                            <action selector="exitButtom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dx5-Au-umC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.33530392250000002" green="0.73001613330000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kBG-lc-E99" secondAttribute="trailing" constant="50" id="6pf-vc-94n"/>
+                                    <constraint firstItem="kBG-lc-E99" firstAttribute="firstBaseline" secondItem="Nn1-d1-cer" secondAttribute="baseline" constant="22" symbolType="layoutAnchor" id="9MU-42-8dY"/>
                                     <constraint firstItem="opl-Qp-IYj" firstAttribute="leading" secondItem="887-3a-Pws" secondAttribute="trailing" constant="40" id="9m8-C9-O8s"/>
                                     <constraint firstItem="S9U-E1-cib" firstAttribute="top" secondItem="C44-Z0-J5v" secondAttribute="top" id="DdO-YP-ftM"/>
+                                    <constraint firstItem="kBG-lc-E99" firstAttribute="leading" secondItem="887-3a-Pws" secondAttribute="trailing" constant="50" id="Dwa-rx-T4H"/>
                                     <constraint firstItem="887-3a-Pws" firstAttribute="top" secondItem="S9U-E1-cib" secondAttribute="bottom" id="FJk-51-1uP"/>
                                     <constraint firstItem="S9U-E1-cib" firstAttribute="leading" secondItem="C44-Z0-J5v" secondAttribute="leading" id="GcB-cT-1kK"/>
                                     <constraint firstItem="ppu-VV-dPe" firstAttribute="leading" secondItem="887-3a-Pws" secondAttribute="trailing" constant="45" id="JIg-Lf-2Kb"/>
@@ -519,7 +529,6 @@
                     <tabBarItem key="tabBarItem" title="Новости" id="Qil-yH-ww3"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aN0-GO-PPw">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -644,7 +653,6 @@
                     <tabBarItem key="tabBarItem" title="Группы" id="3Uc-Su-SWr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QiH-74-WTE">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.33530392250000002" green="0.73001613330000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -663,7 +671,6 @@
                 <navigationController title=" Галерея" id="NTZ-FZ-qHo" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Галерея" id="Vlj-Yi-glk"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Buh-a9-d5j">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -721,7 +728,6 @@
                     <tabBarItem key="tabBarItem" title="Друзья" id="wQP-0A-d4F"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="E3d-iw-B1g">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -738,6 +744,6 @@
         <image name="Actors" width="1200" height="900"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oWm-8L-ESO"/>
+        <segue reference="TmP-PQ-hso"/>
     </inferredMetricsTieBreakers>
 </document>

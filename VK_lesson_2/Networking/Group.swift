@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftyJSON
-class Group: CustomStringConvertible   {
+class Group: Codable, CustomStringConvertible   {
     
     var description: String{
         return "Group: \(id) \(name)"
@@ -22,6 +22,7 @@ class Group: CustomStringConvertible   {
         self.id = json["id"].intValue
         self.name = json["name"].stringValue
         self.photo_50 = json["photo_50"].stringValue
+        
         
     }
 }

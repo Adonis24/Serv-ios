@@ -90,7 +90,7 @@ class GroupTableViewController: UITableViewController {
         let parameters: Parameters = [
             "access_token":Session.instance.token,
             "extended":"1",
-            "count":"2",
+            "count":"100",
             "v":"5.85"
         ]
         

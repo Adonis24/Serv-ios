@@ -7,9 +7,17 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FriendFotoCell: UICollectionViewCell {
     
     @IBOutlet weak var friendFotos: UIImageView!
     
+    public func configue(with photo: Photo) {
+        
+        
+        friendFotos.kf.setImage(with: URL(string: photo.url))
+    
+        
+    }
 }

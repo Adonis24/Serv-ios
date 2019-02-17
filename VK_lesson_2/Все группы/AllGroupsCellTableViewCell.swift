@@ -25,8 +25,7 @@ class AllGroupsCellTableViewCell: UITableViewCell {
     }
     public func configue(with group: Group) {
         
-        let iconUrlString = group.photo_50
-        allGroupLogo.kf.setImage(with: URL(string: iconUrlString))
+        allGroupLogo.kf.setImage(with: URL(string: group.photo_50))
         allGroupName.text = group.name
         
     }

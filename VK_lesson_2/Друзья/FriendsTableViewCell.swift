@@ -21,31 +21,10 @@ import UIKit
 
     
 
-//    @IBInspectable var cornerRadius: CGFloat = 17 {
-//        didSet {
-//            setNeedsDisplay()
-//        }
-//    }
-//    @IBInspectable var borderColor: UIColor = UIColor.black {
-//        didSet {
-//            setNeedsDisplay()
-//        }
-//    }
-//    @IBInspectable var borderWidth: CGFloat = 2 {
-//        didSet {
-//            setNeedsDisplay()
-//        }
-//    }
-//    
-
-
-
-
     override func layoutSubviews() {
         super.layoutSubviews()
 
         friendLogo.layer.cornerRadius = friendLogo.frame.height/2
-        //friendLogo.clipsToBounds = true
         friendLogo.layer.masksToBounds = true
         friendLogo.layer.borderWidth = 2
         friendLogo.layer.borderColor = UIColor.white.cgColor
@@ -53,7 +32,27 @@ import UIKit
    
    }
     
-
+    public func configue(with friend: User) {
+        
+        var  url_photo = ""
+        if  friend.photo_50 != "https://vk.com/images/camera_50.png", url_photo == "" {
+             url_photo = friend.photo_50
+        }
+        if  friend.photo_100 != "https://vk.com/images/camera_100.png", url_photo == "" {
+            url_photo = friend.photo_100
+        }
+        if  friend.photo_200 != "https://vk.com/images/camera_200.png", url_photo == "" {
+            url_photo = friend.photo_200
+        }
+        if  friend.photo_400_orig != "https://vk.com/images/camera_400.png", url_photo == "" {
+            url_photo = friend.photo_400_orig
+        }
+        if url_photo != "" {
+        friendLogo.kf.setImage(with: URL(string: url_photo))
+        }
+        friendName.text = friend.description
+        
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
