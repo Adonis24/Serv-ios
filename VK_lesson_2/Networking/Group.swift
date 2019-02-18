@@ -8,7 +8,15 @@
 
 import Foundation
 import SwiftyJSON
-class Group: Codable, CustomStringConvertible   {
+class Group: Codable, CustomStringConvertible,Comparable   {
+    static func < (lhs: Group, rhs: Group) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: Group, rhs: Group) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     
     var description: String{
         return "Group: \(id) \(name)"

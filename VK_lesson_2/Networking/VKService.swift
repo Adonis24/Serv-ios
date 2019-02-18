@@ -48,11 +48,14 @@ class VKService {
             }
         }
     }
-    public func getFoto(completion: (([Photo]?, Error?) -> Void)? = nil)  {
+    public func getFoto(owner_id: Int, completion:  (([Photo]?, Error?) -> Void)? = nil)  {
         
         let path = "/method/photos.getAll"
         let params: Parameters = [
             "access_token":Session.instance.token,
+            "owner_id": owner_id,
+            "photo_sizes": 1,
+            "count":100,
             "v":"5.85"
         ]
         
@@ -92,5 +95,31 @@ class VKService {
                 completion?(nil, error)
             }
         }
+    }
+    public func  searchGroup(searchText: String, completion: (([Group]?, Error?) -> Void)? = nil)  {
+        
+        let path = "/method/groups.search"
+        let params: Parameters = [
+            "access_token":Session.instance.token,
+            "q":String(searchText),
+            "v":"5.85"
+        ]
+        VKService.sharedManager.request(baseUrl+path, method: .get, parameters: params).responseJSON { response in
+            
+            switch response.result {
+                
+            case .success(let value):
+                let json = JSON(value)
+                let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
+                completion?(groups, nil)
+            case .failure(let error):
+                completion?(nil, error)
+            }
+        }
+        
+//        Alamofire.request(url+path, method: .get, parameters:parameters)
+//            .responseJSON{response in
+//                guard let value = response.value else {return}
+//                print(value)}
     }
 }

@@ -28,6 +28,8 @@ class AllGroupsCellTableViewCell: UITableViewCell {
         allGroupLogo.kf.setImage(with: URL(string: group.photo_50))
         allGroupName.text = group.name
         
+
+        
     }
     
 }

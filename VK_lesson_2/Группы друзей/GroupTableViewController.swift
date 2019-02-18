@@ -8,8 +8,25 @@
 
 import UIKit
 import Alamofire
-class GroupTableViewController: UITableViewController {
 
+
+extension GroupTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        //filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+//extension GroupTableViewController: UISearchBarDelegate {
+//    // MARK: - UISearchBar Delegate
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        filterContentForSearchText(searchBar.text!)
+//    }
+//}
+class GroupTableViewController: UITableViewController,UISearchBarDelegate {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         // Проверяем идентификатор, чтобы убедится, что это нужный переход
         if segue.identifier == "addGroup" {
@@ -19,14 +36,11 @@ class GroupTableViewController: UITableViewController {
             // Получаем индекс выделенной ячейки
             if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
                 // Получаем группу по индексу
-                let group = allGroupsController.allGroups[indexPath.row] 
-                let groupFoto = allGroupsController.allGroupsFoto[group]
-                // Добавляем город в список выбранных городов
-                if !nameGroups.contains(group) {
-                    nameGroups.append(group)
-                
+                let group = allGroupsController.vk_Groups[indexPath.row]
+                // Добавляем группу в список
+                if !vk_Groups.contains{$0.id == group.id} {
+                    vk_Groups.append(group)
                     // Обновляем таблицу
-                    groups[group] = groupFoto
                     tableView.reloadData()
                 }
             }
@@ -35,51 +49,68 @@ class GroupTableViewController: UITableViewController {
         
     }
     
+    /* статические данные для теста
     var nameGroups   = ["Актеры","Композиторы","Автомобили"]
     var groups = ["Актеры":"Actors","Композиторы":"Composers","Автомобили":"Сars"]
+    */
     var vkService = VKService()
-    private var vk_groups = [Group]()
+    private var vk_Groups = [Group]()
+    let searchController = UISearchController(searchResultsController: nil)
+    private var filteredAllGroups = [Group]()
+    var searchActive : Bool = false
+    
     @IBAction func apiGroups(_ sender: Any) {
         getGroups()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        vkService.getGroup(){ [weak self] groups, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            } else if let groups = groups, let self = self {
-//                self.vk_groups = groups
-//
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        searchBar.delegate = self
+      
+        //вилл аппир нельзя добавлять добавление групп не будет работать
         vkService.getGroup(){ [weak self] group, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
             } else if let group = group, let self = self {
-                self.vk_groups = group
+                self.vk_Groups = group
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    
                 }
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
+    }
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        tableView.reloadData()
+        searchActive = false
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            searchActive = false
+        } else {
+            searchActive = true
+            filteredAllGroups = vk_Groups.filter({( group: Group) -> Bool in return group.name.lowercased().contains(searchText.lowercased())})
+            self.tableView.reloadData()
+        }
+        
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
     
     @IBAction func backAuthGroup(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -101,84 +132,77 @@ class GroupTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return vk_groups.count//nameGroups.count
+     
+        if searchActive{
+            return filteredAllGroups.count
+        } else {
+        return vk_Groups.count
+        }
     }
 
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as! GroupTableViewCell
-//        let name = nameGroups[indexPath.row]
-//        let result = groups.filter{(key,value) in key.contains(name) }
-     
-//        cell.groupName.text = result.first?.key
-//        cell.groupLogo.image = UIImage(named: result.first?.value ?? "")
-         cell.configue(with: vk_groups[indexPath.row])
+        if searchActive {
+             cell.configue(with: filteredAllGroups[indexPath.row])
+        } else {
+        cell.configue(with: vk_Groups[indexPath.row])
+        }
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    
+        
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-             let name = nameGroups[indexPath.row]
-            nameGroups.remove(at: indexPath.row)
-            groups.removeValue(forKey: name)
+            vk_Groups.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
- 
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
- 
+    
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -11,15 +11,23 @@ import SwiftyJSON
 class Photo: Codable, CustomStringConvertible   {
     
     var description: String {
-        return "\(id) \(url)"
+        return "\(id) "
     }
     
     let id: Int
+    let sizes: [String:JSON]
+    let src: String
+    let type: String
     let url: String
+ 
     
     init(json: JSON) {
+        
         self.id = json["id"].intValue
-        self.url = json["sizes"][1]["url"].stringValue
+        self.sizes = json["sizes"].dictionaryValue
+        self.src = json["sizes"]["src"].stringValue
+        self.type = json["sizes"]["type"].stringValue
+        self.url = json["sizes"][8]["url"].stringValue
     }
     
 }

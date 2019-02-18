@@ -16,7 +16,7 @@ class FriendFotoCell: UICollectionViewCell {
     public func configue(with photo: Photo) {
         
         
-        friendFotos.kf.setImage(with: URL(string: photo.url))
+        friendFotos.kf.setImage(with: URL(string: photo.src))
     
         
     }

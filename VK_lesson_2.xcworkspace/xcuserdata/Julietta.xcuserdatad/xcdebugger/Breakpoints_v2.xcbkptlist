@@ -6,112 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VK_lesson_2/&#x413;&#x440;&#x443;&#x43f;&#x43f;&#x44b; &#x434;&#x440;&#x443;&#x437;&#x435;&#x438;&#x306;/GroupTableViewController.swift"
-            timestampString = "572044626.303105"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VK_lesson_2/&#x413;&#x440;&#x443;&#x43f;&#x43f;&#x44b; &#x434;&#x440;&#x443;&#x437;&#x435;&#x438;&#x306;/GroupTableViewController.swift"
-            timestampString = "572044626.3270299"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VK_lesson_2/&#x413;&#x440;&#x443;&#x43f;&#x43f;&#x44b; &#x434;&#x440;&#x443;&#x437;&#x435;&#x438;&#x306;/GroupTableViewController.swift"
-            timestampString = "572044626.328041"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VK_lesson_2.GroupTableViewController.viewWillAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "VK_lesson_2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Julietta/Desktop/xcode/Repository/VK/VK-Serv-1/VK_lesson_2/%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B%20%D0%B4%D1%80%D1%83%D0%B7%D0%B5%D0%B8%CC%86/GroupTableViewController.swift"
-                  timestampString = "571727969.847734"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "69"
-                  endingLineNumber = "69"
-                  offsetFromSymbolStart = "112">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;VK_lesson_2.Group&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in VK_lesson_2.GroupTableViewController.viewWillAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "VK_lesson_2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Julietta/Desktop/xcode/Repository/VK/VK-Serv-1/VK_lesson_2/%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B%20%D0%B4%D1%80%D1%83%D0%B7%D0%B5%D0%B8%CC%86/GroupTableViewController.swift"
-                  timestampString = "571727969.851145"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "69"
-                  endingLineNumber = "69"
-                  offsetFromSymbolStart = "69">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VK_lesson_2/&#x413;&#x440;&#x443;&#x43f;&#x43f;&#x44b; &#x434;&#x440;&#x443;&#x437;&#x435;&#x438;&#x306;/GroupTableViewCell.swift"
-            timestampString = "572044626.329141"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "configue(with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VK_lesson_2/&#x414;&#x440;&#x443;&#x437;&#x44c;&#x44f;/FriendsTableViewController.swift"
-            timestampString = "572079540.428376"
+            filePath = "VK_lesson_2/&#x413;&#x440;&#x443;&#x43f;&#x43f;&#x44b; &#x434;&#x440;&#x443;&#x437;&#x435;&#x438;&#x306;/GroupTableViewController.swift"
+            timestampString = "572194248.8134381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "apiFriends(_:)"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "updateSearchResults(for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -120,56 +24,15 @@
          <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
-            condition = "$0.first_name."
-            continueAfterRunningActions = "Yes"
-            filePath = "VK_lesson_2/&#x414;&#x440;&#x443;&#x437;&#x44c;&#x44f;/FriendsTableViewController.swift"
-            timestampString = "572079540.443215"
+            continueAfterRunningActions = "No"
+            filePath = "VK_lesson_2/&#x413;&#x440;&#x443;&#x43f;&#x43f;&#x44b; &#x434;&#x440;&#x443;&#x437;&#x435;&#x438;&#x306;/GroupTableViewController.swift"
+            timestampString = "572194248.848545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "filterContentForSearchText(_:scope:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "addGroup(segue:)"
             landmarkType = "7">
-            <Actions>
-               <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
-                  <ActionContent
-                     consoleCommand = "">
-                  </ActionContent>
-               </BreakpointActionProxy>
-            </Actions>
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VK_lesson_2.FriendsTableViewController.filterContentForSearchText(_: Swift.String, scope: Swift.String) -&gt; ()"
-                  moduleName = "VK_lesson_2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Julietta/Desktop/xcode/Repository/VK/VK-Serv-1/VK_lesson_2/%D0%94%D1%80%D1%83%D0%B7%D1%8C%D1%8F/FriendsTableViewController.swift"
-                  timestampString = "572043414.312416"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "226"
-                  endingLineNumber = "226"
-                  offsetFromSymbolStart = "49">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (VK_lesson_2.User) -&gt; Swift.Bool in VK_lesson_2.FriendsTableViewController.filterContentForSearchText(_: Swift.String, scope: Swift.String) -&gt; ()"
-                  moduleName = "VK_lesson_2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Julietta/Desktop/xcode/Repository/VK/VK-Serv-1/VK_lesson_2/%D0%94%D1%80%D1%83%D0%B7%D1%8C%D1%8F/FriendsTableViewController.swift"
-                  timestampString = "572043414.325013"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "226"
-                  endingLineNumber = "226"
-                  offsetFromSymbolStart = "33">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
