@@ -6,7 +6,8 @@ target 'VK_lesson_2' do
   use_frameworks!
 
   # Pods for VK_lesson_2
-pod  'Alamofire', '~> 4.8'
+pod  'Alamofire'
   pod 'SwiftyJSON'
   pod 'Kingfisher'
+  pod 'RealmSwift'
 end
