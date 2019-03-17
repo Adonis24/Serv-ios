@@ -8,26 +8,32 @@
 
 import Foundation
 import SwiftyJSON
-class Photo: Codable, CustomStringConvertible   {
+import RealmSwift
+class Photo: Object   {
     
-    var description: String {
-        return "\(id) "
-    }
     
-    let id: Int
-    let sizes: [String:JSON]
-    let src: String
-    let type: String
-    let url: String
- 
     
-    init(json: JSON) {
-        
+    @objc dynamic var id: Int = 0
+    @objc dynamic var photoOwnerId: Int = 0
+    @objc dynamic var  src: String = ""
+    @objc dynamic var  type: String = ""
+    @objc dynamic var  url: String = ""
+    @objc dynamic var descrip: String = ""
+    let photosForUser = LinkingObjects(fromType: User.self, property: "photos")
+    
+    //init(json: JSON) {
+    convenience  init(json:JSON) {
+        self.init()
         self.id = json["id"].intValue
-        self.sizes = json["sizes"].dictionaryValue
         self.src = json["sizes"]["src"].stringValue
         self.type = json["sizes"]["type"].stringValue
         self.url = json["sizes"][8]["url"].stringValue
+        self.photoOwnerId = json["owner_id"].intValue
+        self.descrip = "\(id) "
+    }
+    
+    override static func primaryKey()->String {
+        return "id"
     }
     
 }

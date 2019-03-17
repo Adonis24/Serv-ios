@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 
 extension GroupTableViewController: UISearchResultsUpdating {
@@ -55,6 +56,8 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
     */
     var vkService = VKService()
     private var vk_Groups = [Group]()
+    // private var vk_GroupsRealm = [Group]()
+    private var vk_GroupsRealm: Results<Group>?
     let searchController = UISearchController(searchResultsController: nil)
     private var filteredAllGroups = [Group]()
     var searchActive : Bool = false
@@ -72,7 +75,8 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
                 print(error.localizedDescription)
                 return
             } else if let group = group, let self = self {
-                self.vk_Groups = group
+               // self.vk_Groups = group
+                RealmProvider.save(items:group)
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -80,6 +84,12 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
                 }
             }
         }
+        
+        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        let realm = try! Realm(configuration: config)
+        vk_GroupsRealm = realm.objects(Group.self)
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +108,11 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
             searchActive = false
         } else {
             searchActive = true
-            filteredAllGroups = vk_Groups.filter({( group: Group) -> Bool in return group.name.lowercased().contains(searchText.lowercased())})
+            //filteredAllGroups = vk_Groups.filter({( group: Group) -> Bool in return group.name.lowercased().contains(searchText.lowercased())})
+            //vk_GroupsRealm
+             guard let groups = vk_GroupsRealm else { return }
+            filteredAllGroups = groups.filter({( group: Group) -> Bool in return group.name.lowercased().contains(searchText.lowercased())})
+            //vk_GroupsRealm
             self.tableView.reloadData()
         }
         
@@ -111,6 +125,15 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
     func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
+   /* Работа с БД Реалм начало */
+
+    
+    func readGroupDb()  {
+        //read Db
+
+       // }
+    }
+   /* Работа с БД Реалм окончание */
     
     @IBAction func backAuthGroup(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -143,7 +166,8 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
         if searchActive{
             return filteredAllGroups.count
         } else {
-        return vk_Groups.count
+        //return vk_Groups.count
+           return vk_GroupsRealm?.count ?? 0
         }
     }
 
@@ -154,7 +178,9 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
         if searchActive {
              cell.configue(with: filteredAllGroups[indexPath.row])
         } else {
-        cell.configue(with: vk_Groups[indexPath.row])
+            let group = vk_GroupsRealm?[indexPath.row]
+       // cell.configue(with: vk_Groups[indexPath.row])
+            cell.configue(with: group ?? Group())
         }
         return cell
     }
@@ -165,6 +191,7 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
         if editingStyle == .delete {
             // Delete the row from the data source
             vk_Groups.remove(at: indexPath.row)
+            //vk_GroupsRealm?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

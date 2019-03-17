@@ -8,29 +8,27 @@
 
 import Foundation
 import SwiftyJSON
-class Group: Codable, CustomStringConvertible,Comparable   {
-    static func < (lhs: Group, rhs: Group) -> Bool {
-        return lhs.id < rhs.id
-    }
+import RealmSwift
+class Group: Object, Codable  {
+
     
-    static func == (lhs: Group, rhs: Group) -> Bool {
-        return lhs.id == rhs.id
-    }
+         @objc dynamic var id: Int = 0
+         @objc dynamic var name: String = ""
+         @objc dynamic var photo_50: String = ""
+         @objc dynamic var descrip: String = ""
     
-    
-    var description: String{
-        return "Group: \(id) \(name)"
-    }
-        let id: Int
-        let name: String
-        let photo_50: String
-    
-    init(json:JSON) {
-        
+   // init(json:JSON) {
+    convenience  init(json:JSON) {
+        self.init()
         self.id = json["id"].intValue
         self.name = json["name"].stringValue
         self.photo_50 = json["photo_50"].stringValue
+        self.descrip = "Group: \(self.id) \(self.name)"
         
+    
         
+    }
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }

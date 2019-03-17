@@ -50,7 +50,7 @@ import UIKit
         if url_photo != "" {
         friendLogo.kf.setImage(with: URL(string: url_photo))
         }
-        friendName.text = friend.description
+        friendName.text = friend.descrip
         
     }
     

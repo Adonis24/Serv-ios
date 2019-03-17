@@ -10,19 +10,24 @@ import UIKit
 import Alamofire
 import Kingfisher
 import SwiftyJSON
+import RealmSwift
 
 class FriendFotos: UIViewController {
     
     var vkService = VKService()
     var allFotoOneFriend = [Photo]()
+    //var allFotoOneFriend: Results<Photo>?
     var listPhoto = [Photo]()
     var myFriendId: Int = 0
+    var photoId: Int = 0
+    static var realm = try! Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
+    lazy var photosFriends: Results<Photo>? = try! RealmProvider.get(Photo.self)!.filter("ANY photosForUser.id == %@", photoId)
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBAction func apiFotos(_ sender: UIBarButtonItem) {
-        getFotos(owner_id: allFotoOneFriend[0].id)
-    }
+//    @IBAction func apiFotos(_ sender: UIBarButtonItem) {
+//        getFotos(owner_id: allFotoOneFriend?[0].id)
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
@@ -43,12 +48,21 @@ class FriendFotos: UIViewController {
                 print(error.localizedDescription)
             }
             else if let photos = photos, let self = self {
-                self.allFotoOneFriend = photos
+                
+                //self.allFotoOneFriend = photos
+               
+                
+                RealmProvider.save(items: photos)
+                RealmProvider.savePhotoForUser(photos, id: self.myFriendId)
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
             }
-        })
+        }
+            
+        )
+     
+        photosFriends = RealmProvider.get(Photo.self)?.filter("ANY photosForUser.id == %@", self.myFriendId)
     }
     
     /*
@@ -84,14 +98,14 @@ class FriendFotos: UIViewController {
 }
 extension FriendFotos: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.allFotoOneFriend.count
+        return photosFriends?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var url_photo = ""
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendFotos", for: indexPath) as! FriendFotoCell
-        let photo = self.allFotoOneFriend[indexPath.row]
-        url_photo = photo.url
+        let photo = self.photosFriends?[indexPath.row]
+        url_photo = photo?.url ?? ""
         cell.friendFotos.kf.setImage(with: URL(string: url_photo))
         return cell
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 
 class FriendsTableViewController: UITableViewController {
@@ -18,12 +19,18 @@ class FriendsTableViewController: UITableViewController {
     var characters: [String] = []//["Б","Р","Л"]
     var extFields = "first_name,last_name,photo_50,photo_100,photo_200,photo_400_orig,deactivated"
     var filtredCharacters: [String] = []
+    static var realm = try! Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
     let searchController = UISearchController(searchResultsController: nil)
     
     var searchActive : Bool = false
-    var filteredAllFriends = [User]()
+    var filteredAllFriends : Results<User> = {
+        return realm.objects(User.self)
+    }()
+    var vk_friends : Results<User> = {
+        return realm.objects(User.self)
+    }()
     var allFriendsCharacter = [""]
-    var vk_friends = [User]()
+    //var vk_friends = [User]()
     var vkService = VKService()
     
     @IBAction func apiFriends(_ sender: Any) {
@@ -33,27 +40,26 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
+    }
+    
+    override func  viewWillAppear(_ animated: Bool) {
         vkService.getFriends(){ [weak self] friend, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
             } else if let friend = friend, let self = self {
-                friend.forEach{ myFriend in
-                    guard  myFriend.last_name != "" else  { return }
-                    self.vk_friends.append(myFriend)
-                    if !self.characters.contains(String(myFriend.first_name.first!)) { self.characters.append(String(myFriend.first_name.first!))
-                    }
-                    
-                }
+                
+                RealmProvider.save(items: friend.filter {$0.first_name != ""})
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     
                 }
             }
         }
-    }
-    
-    override func  viewWillAppear(_ animated: Bool) {
+        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        guard let realm = try? Realm(configuration: config) else { return }
+        vk_friends = realm.objects(User.self)
         
     }
     
@@ -96,9 +102,9 @@ class FriendsTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         if isFiltering() {
-            return filteredAllFriends.count
+            return filteringFirstLetter(in: filteredAllFriends).count
         } else {
-            return characters.count
+            return filteringFirstLetter(in: vk_friends).count
             
         }
     }
@@ -106,13 +112,18 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
+        //        if isFiltering() {
+        //            return filteredAllFriends.count
+        //        } else {
+        //            //return  names.filter {$0[$0.startIndex] == Character(characters[section]) }.count
+        //            return vk_friends.filter({$0.first_name.first == Character(characters[section]) }).count
+        //        }
         if isFiltering() {
-            return filteredAllFriends.count
+            return filteringInSection(of: filteredAllFriends,in: section).count
         } else {
-            //return  names.filter {$0[$0.startIndex] == Character(characters[section]) }.count
-            return vk_friends.filter({$0.first_name.first == Character(characters[section]) }).count
+            return filteringInSection(of: vk_friends, in:section).count
+            
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -129,18 +140,19 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as! FriendsTableViewCell
-        var fUser: User
+        var fUser:  Results<User>
         
         if isFiltering() {
             
-            fUser = filteredAllFriends[indexPath.row]
+            fUser = filteringInSection(of: filteredAllFriends, in: indexPath.section)
             
         } else {
+            fUser = filteringInSection(of: vk_friends, in: indexPath.section)
+            //fUser = vk_friends?.filter({$0.first_name.first == Character(self.characters[indexPath.section]) })[indexPath.row] ?? User()}
             
-            fUser = vk_friends.filter({$0.first_name.first == Character(characters[indexPath.section]) })[indexPath.row]}
-        
-        cell.configue(with: fUser)
-        
+            
+        }
+        cell.configue(with: fUser[indexPath.row])
         return cell
     }
     
@@ -153,9 +165,10 @@ class FriendsTableViewController: UITableViewController {
     }
     //Titles section
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        if isFiltering() { return [""]} else {
-            return characters
+        if isFiltering() { return nil} else {
+            return filteringFirstLetter(in: vk_friends)
         }
+        
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -167,7 +180,7 @@ class FriendsTableViewController: UITableViewController {
             let headerL = UILabel(frame: CGRect(x: 20, y: 8, width: 50, height: 20))
             headerL.textAlignment = .center
             headerL.font = UIFont.italicSystemFont(ofSize: CGFloat(14))
-            headerL.text = characters[section]
+            headerL.text = filteringFirstLetter(in: vk_friends)[section]//characters[section]
             viewHeader.addSubview(headerL)
             //add label header stop
             return viewHeader
@@ -177,7 +190,8 @@ class FriendsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //var listFriends = [User]()
-        var fUser: User
+        var fUser:  User
+        var listFriends: Results<User>
         if segue.identifier == "allFotoFriend" {
             let fotoFriendsController  = segue.destination as! FriendFotos
             let myFriendsController = segue.source as! FriendsTableViewController
@@ -185,7 +199,13 @@ class FriendsTableViewController: UITableViewController {
             
             if let indexPath = myFriendsController.tableView.indexPathForSelectedRow {
                 
-                let listFriends = myFriendsController.vk_friends.filter({$0.first_name.first == Character(characters[indexPath.section]) })
+                //let listFriends = myFriendsController.vk_friends.filter({$0.first_name.first == Character(self.characters[indexPath.section]) })
+                if isFiltering() {
+                    listFriends = filteringInSection(of: myFriendsController.filteredAllFriends, in: indexPath.section)
+                } else {
+                    listFriends = filteringInSection(of: myFriendsController.vk_friends, in: indexPath.section)
+                }
+                
                 if listFriends.count>0 {
                     fUser = listFriends[indexPath.row]
                     fotoFriendsController.myFriendId = fUser.id
@@ -194,6 +214,9 @@ class FriendsTableViewController: UITableViewController {
             
         }
     }
+    
+    
+    
     func searchBarIsEmpty() -> Bool {
         // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
@@ -201,9 +224,10 @@ class FriendsTableViewController: UITableViewController {
     
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredAllFriends = vk_friends.filter({( user: User) -> Bool in return user.first_name.lowercased().contains(searchText.lowercased())
-            }
-        )
+        //filteredAllFriends = vk_friends?.filter({( user: User) -> Bool in return user.first_name.lowercased().contains(searchText.lowercased())
+        // }
+        //)
+        filteredAllFriends = vk_friends.filter("first_name CONTAINS[cd] %@",searchText)
         self.tableView.reloadData()
         
     }
@@ -225,3 +249,26 @@ extension FriendsTableViewController: UISearchBarDelegate {
         filterContentForSearchText(searchBar.text!)
     }
 }
+extension FriendsTableViewController{
+    func filteringFirstLetter (in friends: Results<User>) -> [String] {
+        var friendsIndexTitles = [String]()
+        for friend in friends {
+            
+            if let letter = friend.first_name.first {
+                friendsIndexTitles.append(String(letter))
+            } else {
+                let letter = friend.first_name.first
+                friendsIndexTitles.append(String(letter!))
+            }
+        }
+        return Array(Set(friendsIndexTitles)).sorted()
+    }
+    func filteringInSection(of friends: Results<User>, in section:Int) -> Results<User>
+    {
+        let firstLetter = filteringFirstLetter(in: friends)[section]
+        return friends.filter("first_name BEGINSWITH %@",firstLetter)
+        
+        
+    }
+}
+

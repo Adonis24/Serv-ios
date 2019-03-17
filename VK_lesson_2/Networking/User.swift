@@ -8,23 +8,27 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
-class User: Codable,CustomStringConvertible {
-    var description: String {
-        return "\(first_name) \(last_name)"
-    }
+class User: Object {
+//    var description: String {
+//        return "\(first_name) \(last_name)"
+//    }
     
-    let id: Int
-    let first_name: String
-    let last_name: String
-    let photo_50: String
-    let photo_100: String
-    let photo_200: String
-    let photo_400_orig: String
-    let deactivated: String
+    @objc dynamic var id: Int = 0
+    @objc dynamic var first_name: String = ""
+    @objc dynamic var last_name: String = ""
+    @objc dynamic var photo_50: String = ""
+    @objc dynamic var photo_100: String = ""
+    @objc dynamic var photo_200: String = ""
+    @objc dynamic var photo_400_orig: String = ""
+    @objc dynamic var deactivated: String = ""
+    @objc dynamic var descrip: String = ""
+    var photos = List<Photo>()
     
-    init(json: JSON) {
-        
+    //init(json: JSON) {
+     convenience  init(json:JSON) {
+        self.init()
         self.id = json["id"].intValue
         self.first_name = json["first_name"].stringValue
         self.last_name = json["last_name"].stringValue
@@ -33,7 +37,12 @@ class User: Codable,CustomStringConvertible {
         self.photo_200 = json["photo_200"].stringValue
         self.photo_400_orig = json["photo_400_orig"].stringValue
         self.deactivated = json["deactivated"].stringValue
+        self.descrip = "\(self.first_name) \(self.last_name)"
         
+    }
+    
+    override static func primaryKey() -> String{
+        return "id"
     }
 }
 
