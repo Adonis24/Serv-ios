@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import RealmSwift
+import Kingfisher
 
 
 extension GroupTableViewController: UISearchResultsUpdating {
@@ -61,6 +62,7 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
     let searchController = UISearchController(searchResultsController: nil)
     private var filteredAllGroups = [Group]()
     var searchActive : Bool = false
+    var notificationToken: NotificationToken?
     
     @IBAction func apiGroups(_ sender: Any) {
         getGroups()
@@ -95,6 +97,10 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        notificationToken?.invalidate()
     }
     
     
@@ -207,6 +213,25 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
         return UITableView.automaticDimension
     }
     
+    
+    func pairTableAndRealm() {
+        
+        vk_GroupsRealm =  RealmProvider.get(Group.self)
+        notificationToken = vk_GroupsRealm?.observe { [weak self] changes in
+           guard let self = self else { return }
+           // guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                self.tableView.reloadData()
+            
+            case .update(_, let dels, let ins, let mods):
+                self.tableView.applyChanges(deletions: dels, insertions: ins, updates: mods)
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
+    }
+
     /*
      // Override to support rearranging the table view.
      override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

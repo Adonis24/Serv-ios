@@ -21,7 +21,7 @@ class FriendsTableViewController: UITableViewController {
     var filtredCharacters: [String] = []
     static var realm = try! Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
     let searchController = UISearchController(searchResultsController: nil)
-    
+    var notificationToken: NotificationToken?
     var searchActive : Bool = false
     var filteredAllFriends : Results<User> = {
         return realm.objects(User.self)
@@ -235,6 +235,23 @@ class FriendsTableViewController: UITableViewController {
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
+    func pairTableAndRealm() {
+        let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        guard let realm = try? Realm(configuration: configuration) else {return }
+        vk_friends = realm.objects(User.self)
+        notificationToken = vk_friends.observe ({ [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let dels, let ins, let mods):
+                tableView.applyChanges(deletions: dels, insertions: ins, updates: mods)
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        })
+    }
     
 }
 extension FriendsTableViewController: UISearchResultsUpdating {
@@ -270,5 +287,6 @@ extension FriendsTableViewController{
         
         
     }
+
 }
 

@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
+
 extension AllGroupsTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
@@ -35,6 +37,7 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
     let searchController = UISearchController(searchResultsController: nil)
     var filteredAllGroups = [Group]() 
     var searchActive : Bool = false
+    var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,5 +140,5 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
         return searchController.searchBar.text?.isEmpty ?? true
     }
 
-    
+
 }

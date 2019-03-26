@@ -21,7 +21,8 @@ class FriendFotos: UIViewController {
     var myFriendId: Int = 0
     var photoId: Int = 0
     static var realm = try! Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
-    lazy var photosFriends: Results<Photo>? = try! RealmProvider.get(Photo.self)!.filter("ANY photosForUser.id == %@", photoId)
+    lazy var photosFriends: Results<Photo>? = try! RealmProvider.get(Photo.self)?.filter("ANY photosForUser.id == %@", photoId)
+    var notificationToken: NotificationToken?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -31,7 +32,7 @@ class FriendFotos: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
-        
+        pairCollectionAndRealm()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -114,7 +115,27 @@ extension FriendFotos: UICollectionViewDataSource {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
+    func pairCollectionAndRealm() {
+        
+       
+        
+        notificationToken = photosFriends?.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let collectionView = self?.collectionView else { return }
+            switch changes {
+            case .initial:
+                collectionView.reloadData()
+            case .update(_, let dels, let ins, let mods):
+                collectionView.performBatchUpdates({
+                    collectionView.insertItems(at: ins.map({ IndexPath(row: $0, section: 0) }))
+                    collectionView.deleteItems(at: dels.map({ IndexPath(row: $0, section: 0)}))
+                    collectionView.reloadItems(at: mods.map({ IndexPath(row: $0, section: 0) }))
+                }, completion: nil)
+
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
+    }
 }
 
 
