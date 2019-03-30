@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GroupTableViewCell: UITableViewCell {
 
@@ -19,26 +20,13 @@ class GroupTableViewCell: UITableViewCell {
     
     @IBOutlet weak var groupName: UILabel!
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        groupName.text = nil
-//        groupLogo.image = nil
-//    }
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        groupLogo.clipsToBounds = true
-//        groupLogo.layer.cornerRadius = groupLogo.frame.width/2
-//
-//    }
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
+    public func configue(with group: Group) {
+        
+        
+        groupLogo.kf.setImage(with: URL(string: group.photo_50))
+        groupName.text = group.name
+        
+    }
+
 
 }

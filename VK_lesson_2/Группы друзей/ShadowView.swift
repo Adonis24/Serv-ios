@@ -48,23 +48,7 @@ import UIKit
         }
     }
 
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//       layer.cornerRadius = 20//setupRadius(frame: frame)
-//       // setupShadow(frame: CGRect)
-//    }
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        layer.cornerRadius = 20//setupRadius(frame: frame)
-//    }
-       // layer.cornerRadius = setupRadius(frame: frame)
-        //setupShadow()
-    
-//    
-//    func setupRadius(frame: CGRect)->CGFloat
-//    {
-//        return frame.height/2
-//    }
+
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)

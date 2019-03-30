@@ -8,14 +8,16 @@
 
 import Foundation
 class Session{
-    var token: String
-    var userid: Int
+    
+    static let instance = Session()
+    var token = ""
+    var userId = 0
   
-    init(token:String, userid:Int) {
-        self.token = token
-        self.userid = userid
-        
-    }
+//   init(token:String, userId:Int) {
+//       self.token = token
+//       self.userId = userId
+
+   // }
   
 
 }

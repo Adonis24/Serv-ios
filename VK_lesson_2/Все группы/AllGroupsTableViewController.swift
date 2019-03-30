@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import RealmSwift
 
 extension AllGroupsTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
@@ -16,36 +18,66 @@ extension AllGroupsTableViewController: UISearchResultsUpdating {
 }
 class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
  
+    @IBAction func apiSearch(_ sender: Any) {
+        if searchActive{
+       searchGroup()
+        }
+        
+    }
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    /*
     var allGroups = ["Актеры","Композиторы","Автомобили","Спорт","Путешествие","Экстрим","Политика"]
     var allGroupsFoto = ["Актеры":"Actors","Композиторы":"Composers","Автомобили":"Сars","Спорт":"Sport","Путешествие":"Travel","Экстрим":"Extrim","Политика":"Polit"]
+     */
+ private var vkService = VKService()
+    
+    var vk_Groups = [Group]()
     let searchController = UISearchController(searchResultsController: nil)
-    var filteredAllGroups: [String] = []
+    var filteredAllGroups = [Group]() 
     var searchActive : Bool = false
+    var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredAllGroups = allGroups.filter({(text) -> Bool in
-            let tmp: NSString = text as NSString
-            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            return range.location != NSNotFound
-        })
-        // Filter the data array and get only those countries that match the search text.
-//                filteredAllGroups = allGroups.filter({ (searchText) -> Bool in
-//                    let groupsMatch: NSString = searchText as NSString
-//
-//                    return (groupsMatch.range(of: searchText, options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
-//                })
+    func searchGroup()  {
         
-        searchActive = true
-        tableView.reloadData()
+        let url = "https://api.vk.com"
+        let path = "/method/groups.search"
+        let parameters: Parameters = [
+            "access_token":Session.instance.token,
+            "q":String(searchBar.text!),
+            "v":"5.85"
+        ]
+        
+        Alamofire.request(url+path, method: .get, parameters:parameters)
+            .responseJSON{response in
+                guard let value = response.value else {return}
+                print(value)}
     }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        if searchText != "" {
+        vkService.searchGroup(searchText: searchText){ [weak self] group, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else if let group = group, let self = self {
+               
+                   self.vk_Groups = group
+                }
+                DispatchQueue.main.async {
+                    self?.filteredAllGroups = self!.vk_Groups.filter({( group: Group) -> Bool in return group.name.lowercased().contains(searchText.lowercased())})
+                    self?.searchActive = true
+                    self?.tableView.reloadData()
+                    
+                }
+            }
+        }
+
+}
 
     // MARK: - Table view data source
 
@@ -60,26 +92,27 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
             return filteredAllGroups.count
         }
         
-        return allGroups.count
+        return vk_Groups.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupsCell", for: indexPath) as! AllGroupsCellTableViewCell
-        var name = ""
-        if searchActive {
-             name = filteredAllGroups[indexPath.row]
-        } else {
-              name = allGroups[indexPath.row]
-        }
-        let result = allGroupsFoto.filter{(key,value) in key.contains(name) }
-        cell.allGroupLogo.image = UIImage(named: result.first?.value ?? "")
-        cell.allGroupName.text = result.first?.key
-        
-        
 
-        return cell
+        var curGroup: Group
+        
+        if searchActive {
+            
+            curGroup = filteredAllGroups[indexPath.row]
+            
+        } else {
+            
+            curGroup = vk_Groups[indexPath.row]
+           
+        }
+        cell.configue(with: curGroup)
+       return cell
     }
  
     // MARK: - Private instance methods
@@ -92,10 +125,6 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
-    
-
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         tableView.reloadData()
@@ -110,50 +139,6 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
         // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    
 }

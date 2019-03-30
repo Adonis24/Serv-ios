@@ -34,6 +34,9 @@ class VKLoginController: UIViewController {
         return checkResult
     }
     
+    @IBAction func exitButtom(_ sender: Any) {
+      exit(0)
+    }
     func checkUserData() -> Bool {
         let login = loginInput.text!
         let password = passwordInput.text!
