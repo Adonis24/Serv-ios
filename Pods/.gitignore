@@ -1,2 +1,11 @@
 /Realm/
 /RealmSwift/
+/Firebase/
+/FirebaseAnalytics/
+/FirebaseCore/
+/FirebaseInstanceID/
+/GoogleAppMeasurement/
+/GoogleUtilities/
+/Headers/
+/Local Podspecs/
+/nanopb/

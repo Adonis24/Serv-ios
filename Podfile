@@ -10,4 +10,5 @@ pod  'Alamofire'
   pod 'SwiftyJSON'
   pod 'Kingfisher'
   pod 'RealmSwift'
+pod 'Firebase/Core'
 end

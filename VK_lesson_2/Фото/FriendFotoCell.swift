@@ -13,11 +13,15 @@ class FriendFotoCell: UICollectionViewCell {
     
     @IBOutlet weak var friendFotos: UIImageView!
     
-    public func configue(with photo: Photo) {
-        
-        
-        friendFotos.kf.setImage(with: URL(string: photo.src))
+
     
+    public func configue(with url_photo: String) {
+        
+       
+        if url_photo != "" {
+            friendFotos.kf.setImage(with: URL(string: url_photo))
+        }
+      
         
     }
 }

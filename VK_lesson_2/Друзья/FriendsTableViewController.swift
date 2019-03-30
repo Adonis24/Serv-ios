@@ -156,6 +156,11 @@ class FriendsTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    self.performSegue(withIdentifier: "allFotoFriend", sender: self)
+       
+    }
+    
     //* data source end
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

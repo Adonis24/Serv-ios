@@ -21,7 +21,7 @@ class FriendFotos: UIViewController {
     var myFriendId: Int = 0
     var photoId: Int = 0
     static var realm = try! Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
-    lazy var photosFriends: Results<Photo>? = try! RealmProvider.get(Photo.self)?.filter("ANY photosForUser.id == %@", photoId)
+    lazy var photosFriends: Results<Photo>? = try! RealmProvider.get(Photo.self)?.filter("ANY photosForUser.id == %@ AND url != %e", photoId,"")
     var notificationToken: NotificationToken?
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -63,7 +63,7 @@ class FriendFotos: UIViewController {
             
         )
      
-        photosFriends = RealmProvider.get(Photo.self)?.filter("ANY photosForUser.id == %@", self.myFriendId)
+        photosFriends = RealmProvider.get(Photo.self)?.filter("ANY photosForUser.id == %@ AND url != %e", self.myFriendId,"")
     }
     
     /*
@@ -103,11 +103,12 @@ extension FriendFotos: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      
         var url_photo = ""
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendFotos", for: indexPath) as! FriendFotoCell
         let photo = self.photosFriends?[indexPath.row]
         url_photo = photo?.url ?? ""
-        cell.friendFotos.kf.setImage(with: URL(string: url_photo))
+        cell.configue(with: url_photo)
         return cell
     }
     
