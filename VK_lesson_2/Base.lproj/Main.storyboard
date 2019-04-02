@@ -37,7 +37,7 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="y4I-uL-tJO" id="FaY-Oc-xnF"/>
-                        <segue destination="npE-Am-Lk3" kind="presentation" identifier="VKLogin" id="oWm-8L-ESO"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="VKLogin" id="jps-Pm-UCC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZ7-Y9-Ti6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,7 +99,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="npE-Am-Lk3" kind="show" id="TmP-PQ-hso"/>
+                                            <segue destination="npE-Am-Lk3" kind="show" identifier="Log In" id="TmP-PQ-hso"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jDv-n8-tsj">
@@ -108,45 +108,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="53E-k4-0D3">
-                                        <rect key="frame" x="102" y="365" width="168" height="40"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B9J-5g-ydt" userLabel="Load view" customClass="LoadView" customModule="VK_lesson_2" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="Zfg-D7-yIo"/>
-                                                    <constraint firstAttribute="height" constant="40" id="ks0-i2-bMe"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nn1-d1-cer" userLabel="Load view" customClass="LoadView" customModule="VK_lesson_2" customModuleProvider="target">
-                                                <rect key="frame" x="64" y="0.0" width="40" height="40"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="0IW-Kv-dVj"/>
-                                                    <constraint firstAttribute="width" constant="40" id="axC-rQ-1fb"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hq-a3-hdH" userLabel="Load view" customClass="LoadView" customModule="VK_lesson_2" customModuleProvider="target">
-                                                <rect key="frame" x="128" y="0.0" width="40" height="40"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="dnh-VO-Ol6"/>
-                                                    <constraint firstAttribute="height" constant="40" id="iSP-h3-SNw"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="9hq-a3-hdH" firstAttribute="leading" secondItem="Nn1-d1-cer" secondAttribute="trailing" constant="24" id="0UN-OW-ROK"/>
-                                            <constraint firstItem="Nn1-d1-cer" firstAttribute="leading" secondItem="B9J-5g-ydt" secondAttribute="trailing" constant="24" id="W8S-Ro-Z6S"/>
-                                            <constraint firstItem="9hq-a3-hdH" firstAttribute="width" secondItem="B9J-5g-ydt" secondAttribute="width" id="dvx-H6-259"/>
-                                            <constraint firstItem="Nn1-d1-cer" firstAttribute="height" secondItem="B9J-5g-ydt" secondAttribute="height" id="jFq-mt-Euf"/>
-                                            <constraint firstItem="9hq-a3-hdH" firstAttribute="height" secondItem="B9J-5g-ydt" secondAttribute="height" id="pqT-eL-rPN"/>
-                                        </constraints>
-                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBG-lc-E99">
                                         <rect key="frame" x="50" y="406.5" width="275" height="30"/>
                                         <state key="normal" title="Exit"/>
@@ -154,12 +115,21 @@
                                             <action selector="exitButtom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dx5-Au-umC"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NF-UQ-QUc">
+                                        <rect key="frame" x="150" y="378" width="75" height="30"/>
+                                        <state key="normal" title="Sign up">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pqj-zQ-XEh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.33530392250000002" green="0.73001613330000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="kBG-lc-E99" secondAttribute="trailing" constant="50" id="6pf-vc-94n"/>
-                                    <constraint firstItem="kBG-lc-E99" firstAttribute="firstBaseline" secondItem="Nn1-d1-cer" secondAttribute="baseline" constant="22" symbolType="layoutAnchor" id="9MU-42-8dY"/>
                                     <constraint firstItem="opl-Qp-IYj" firstAttribute="leading" secondItem="887-3a-Pws" secondAttribute="trailing" constant="40" id="9m8-C9-O8s"/>
+                                    <constraint firstItem="kBG-lc-E99" firstAttribute="top" secondItem="5NF-UQ-QUc" secondAttribute="bottom" constant="-1.5" id="BjN-PX-5KW"/>
                                     <constraint firstItem="S9U-E1-cib" firstAttribute="top" secondItem="C44-Z0-J5v" secondAttribute="top" id="DdO-YP-ftM"/>
                                     <constraint firstItem="kBG-lc-E99" firstAttribute="leading" secondItem="887-3a-Pws" secondAttribute="trailing" constant="50" id="Dwa-rx-T4H"/>
                                     <constraint firstItem="887-3a-Pws" firstAttribute="top" secondItem="S9U-E1-cib" secondAttribute="bottom" id="FJk-51-1uP"/>
@@ -171,7 +141,6 @@
                                     <constraint firstAttribute="trailing" secondItem="R32-dU-Jf2" secondAttribute="trailing" constant="45" id="P4c-AI-zC8"/>
                                     <constraint firstAttribute="trailing" secondItem="I5G-ea-zE9" secondAttribute="trailing" constant="45" id="SoT-q7-XwM"/>
                                     <constraint firstItem="I5G-ea-zE9" firstAttribute="top" secondItem="jDv-n8-tsj" secondAttribute="bottom" constant="56" id="T7K-Zg-8JC"/>
-                                    <constraint firstItem="53E-k4-0D3" firstAttribute="leading" secondItem="C44-Z0-J5v" secondAttribute="leading" constant="102" id="TTb-a1-BAz"/>
                                     <constraint firstItem="R32-dU-Jf2" firstAttribute="top" secondItem="ppu-VV-dPe" secondAttribute="bottom" constant="14" id="UZi-oZ-RCw"/>
                                     <constraint firstItem="WRy-ff-8x3" firstAttribute="top" secondItem="R32-dU-Jf2" secondAttribute="bottom" constant="23" id="WC5-pq-IWF"/>
                                     <constraint firstAttribute="trailing" secondItem="jDv-n8-tsj" secondAttribute="trailing" constant="45" id="Ysj-Dt-Ik6"/>
@@ -179,13 +148,15 @@
                                     <constraint firstAttribute="height" constant="647" id="cEv-49-yys"/>
                                     <constraint firstItem="opl-Qp-IYj" firstAttribute="top" secondItem="S9U-E1-cib" secondAttribute="bottom" constant="45" id="e40-VP-hwU"/>
                                     <constraint firstItem="887-3a-Pws" firstAttribute="leading" secondItem="C44-Z0-J5v" secondAttribute="leading" id="eIF-C7-rlM"/>
-                                    <constraint firstItem="53E-k4-0D3" firstAttribute="top" secondItem="I5G-ea-zE9" secondAttribute="bottom" constant="7" id="fO7-g1-nbd"/>
                                     <constraint firstAttribute="trailing" secondItem="ppu-VV-dPe" secondAttribute="trailing" constant="45" id="gKw-Mt-WfI"/>
+                                    <constraint firstAttribute="trailing" secondItem="5NF-UQ-QUc" secondAttribute="trailing" constant="150" id="meI-cZ-9RY"/>
                                     <constraint firstItem="jDv-n8-tsj" firstAttribute="leading" secondItem="887-3a-Pws" secondAttribute="trailing" constant="45" id="oxB-Zr-DVX"/>
                                     <constraint firstItem="R32-dU-Jf2" firstAttribute="leading" secondItem="887-3a-Pws" secondAttribute="trailing" constant="45" id="pQk-bX-BgY"/>
+                                    <constraint firstItem="5NF-UQ-QUc" firstAttribute="leading" secondItem="887-3a-Pws" secondAttribute="trailing" constant="150" id="sG7-hm-b2I"/>
                                     <constraint firstAttribute="bottom" secondItem="887-3a-Pws" secondAttribute="bottom" id="tDS-e3-myG"/>
                                     <constraint firstAttribute="trailing" secondItem="WRy-ff-8x3" secondAttribute="trailing" constant="45" id="vBj-i2-y3a"/>
                                     <constraint firstItem="opl-Qp-IYj" firstAttribute="centerX" secondItem="C44-Z0-J5v" secondAttribute="centerX" id="vM3-8j-uS9"/>
+                                    <constraint firstItem="5NF-UQ-QUc" firstAttribute="top" secondItem="I5G-ea-zE9" secondAttribute="bottom" constant="20" id="wT7-N5-zB1"/>
                                     <constraint firstItem="ppu-VV-dPe" firstAttribute="top" secondItem="opl-Qp-IYj" secondAttribute="bottom" constant="38.5" id="zJd-eU-ijP"/>
                                 </constraints>
                             </scrollView>
@@ -203,12 +174,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="gnq-pD-Aeo"/>
                     <connections>
-                        <outlet property="loadStackView" destination="53E-k4-0D3" id="HTI-io-eFK"/>
-                        <outlet property="loadView_1" destination="B9J-5g-ydt" id="CRb-JY-oYx"/>
-                        <outlet property="loadView_2" destination="Nn1-d1-cer" id="HQS-NQ-uWg"/>
-                        <outlet property="loadView_3" destination="9hq-a3-hdH" id="yC9-aT-rFs"/>
                         <outlet property="loginInput" destination="R32-dU-Jf2" id="Kl5-2A-8Sm"/>
                         <outlet property="passwordInput" destination="jDv-n8-tsj" id="J0q-Mz-ffZ"/>
+                        <outlet property="signUP" destination="5NF-UQ-QUc" id="xcJ-qp-2MY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -757,7 +725,4 @@
             <point key="canvasLocation" x="2793" y="795"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="TmP-PQ-hso"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import Firebase
+
 
 class VKLoginController: UIViewController {
     var delay: CFTimeInterval = 0.4
+    private var handle: AuthStateDidChangeListenerHandle!
     @IBOutlet weak var loadStackView: UIStackView!
     
     @IBOutlet weak var loginInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     
- 
+    
+    
     @IBOutlet weak var loadView_1: LoadView!
     
     @IBOutlet weak var loadView_2: LoadView!
@@ -36,6 +40,51 @@ class VKLoginController: UIViewController {
     
     @IBAction func exitButtom(_ sender: Any) {
       exit(0)
+    }
+    
+    
+    @IBAction func signUp(_ sender: UIButton) {
+        
+        
+        // 1
+        let alert = UIAlertController(title: "Register",
+                                      message: "Register",
+                                      preferredStyle: .alert)
+        // 2
+        alert.addTextField { textEmail in
+            textEmail.placeholder = "Enter your email"
+        }
+        alert.addTextField { textPassword in
+            textPassword.isSecureTextEntry = true
+            textPassword.placeholder = "Enter your password"
+        }
+        // 3
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel)
+        
+        // 4
+        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+            // 4.1
+            guard let emailField = alert.textFields?[0],
+                let passwordField = alert.textFields?[1],
+                let password = passwordField.text,
+                let email = emailField.text else { return }
+            // 4.2
+            Auth.auth().createUser(withEmail: email, password: password) { [weak self] user, error in
+                if let error = error {
+                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                } else {
+                    // 4.3
+                    Auth.auth().signIn(withEmail: email, password: password)
+                }
+            }
+        }
+        // 5
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+        
+
     }
     func checkUserData() -> Bool {
         let login = loginInput.text!
@@ -59,7 +108,16 @@ class VKLoginController: UIViewController {
         present(alter, animated: true, completion: nil)
     }
     
-    
+    func showAlert(title: String,message: String)
+    {
+        let alertVK = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        // Добавляем кнопку на UIAlertController
+        alertVK.addAction(action)
+        // Показываем UIAlertController
+        present(alertVK, animated: true, completion: nil)
+        
+    }
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -80,6 +138,16 @@ class VKLoginController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        //Adding authorization status listener
+        self.handle = Auth.auth().addStateDidChangeListener { auth, user in
+            if user != nil {
+                self.performSegue(withIdentifier: "Log In", sender: nil)
+                self.loginInput.text = nil
+                self.passwordInput.text = nil
+            }
+        }
+
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         
@@ -94,6 +162,8 @@ class VKLoginController: UIViewController {
             self.delay += 0.1
         }
          self.delay = 0
+        
+        Auth.auth().removeStateDidChangeListener(handle)
     }
     
     func manageOpacity(_ sender: UIView, delay: CFTimeInterval)

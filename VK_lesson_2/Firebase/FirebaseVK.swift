@@ -1,10 +1,4 @@
-//
-//  FirebaseVK.swift
-//  VK_Anna_Ershova
-//
-//  Created by Anna Ershova on 3/6/19.
-//  Copyright © 2019 Anna Ershova. All rights reserved.
-//
+
 
 import Foundation
 import Firebase

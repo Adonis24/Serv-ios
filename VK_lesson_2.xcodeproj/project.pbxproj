@@ -41,7 +41,7 @@
 		01D59DB321F3491D00417539 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D59DB221F3491D00417539 /* ShadowView.swift */; };
 		01EE84A821F47B6A009F6E6E /* CornerAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE84A721F47B6A009F6E6E /* CornerAvatar.swift */; };
 		01F51CCE22231F3A0068B5CC /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F51CCD22231F3A0068B5CC /* RealmProvider.swift */; };
-		01F51CD0224FEFAD0068B5CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01F51CCF224FEFAD0068B5CC /* GoogleService-Info.plist */; };
+		01F51CD92253E1470068B5CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01F51CD82253E1460068B5CC /* GoogleService-Info.plist */; };
 		7438E031A59B50F969C851EC /* Pods_VK_lesson_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692AEA94E0763A985BA22734 /* Pods_VK_lesson_2.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +82,8 @@
 		01D59DB221F3491D00417539 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		01EE84A721F47B6A009F6E6E /* CornerAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerAvatar.swift; sourceTree = "<group>"; };
 		01F51CCD22231F3A0068B5CC /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
-		01F51CCF224FEFAD0068B5CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		01F51CD52253DDA80068B5CC /* FirebaseVK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseVK.swift; sourceTree = "<group>"; };
+		01F51CD82253E1460068B5CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		689EE0098BFD19BF8395AFA2 /* Pods-VK_lesson_2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_lesson_2.debug.xcconfig"; path = "Target Support Files/Pods-VK_lesson_2/Pods-VK_lesson_2.debug.xcconfig"; sourceTree = "<group>"; };
 		692AEA94E0763A985BA22734 /* Pods_VK_lesson_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VK_lesson_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51BDF099CEB3B345782B372 /* Pods-VK_lesson_2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_lesson_2.release.xcconfig"; path = "Target Support Files/Pods-VK_lesson_2/Pods-VK_lesson_2.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,7 +122,8 @@
 		0142442A21DCCD410055095C /* VK_lesson_2 */ = {
 			isa = PBXGroup;
 			children = (
-				01F51CCF224FEFAD0068B5CC /* GoogleService-Info.plist */,
+				01F51CD82253E1460068B5CC /* GoogleService-Info.plist */,
+				01F51CD12253DD4D0068B5CC /* Firebase */,
 				01F51CCD22231F3A0068B5CC /* RealmProvider.swift */,
 				01AF707C221340DD00435B06 /* Networking */,
 				017AC5472206C13800F0F897 /* Галерея */,
@@ -130,7 +132,7 @@
 				015CB38121EA130300B32CBE /* Фото */,
 				015CB37621EA116900B32CBE /* Все группы */,
 				019B8A2C21E3C8DB009B4F32 /* Друзья */,
-				014AAC0F21E3B17E0048FCBB /* Группы друзей */,
+				014AAC0F21E3B17E0048FCBB /* Группы друзей */,
 				0142442B21DCCD410055095C /* AppDelegate.swift */,
 				0142442F21DCCD410055095C /* Main.storyboard */,
 				0142443221DCCD490055095C /* Assets.xcassets */,
@@ -140,7 +142,7 @@
 			path = VK_lesson_2;
 			sourceTree = "<group>";
 		};
-		014AAC0F21E3B17E0048FCBB /* Группы друзей */ = {
+		014AAC0F21E3B17E0048FCBB /* Группы друзей */ = {
 			isa = PBXGroup;
 			children = (
 				014AAC1021E3B1C50048FCBB /* GroupTableViewController.swift */,
@@ -226,6 +228,14 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		01F51CD12253DD4D0068B5CC /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				01F51CD52253DDA80068B5CC /* FirebaseVK.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		084E0D89C0926A13EB562A5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,7 +315,7 @@
 			files = (
 				0142443621DCCD490055095C /* LaunchScreen.storyboard in Resources */,
 				0142443321DCCD490055095C /* Assets.xcassets in Resources */,
-				01F51CD0224FEFAD0068B5CC /* GoogleService-Info.plist in Resources */,
+				01F51CD92253E1470068B5CC /* GoogleService-Info.plist in Resources */,
 				0142443121DCCD410055095C /* Main.storyboard in Resources */,
 				017AC5332201FFAA00F0F897 /* NewsTableViewCell.xib in Resources */,
 			);
@@ -324,6 +334,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-VK_lesson_2/Pods-VK_lesson_2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -336,6 +347,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
