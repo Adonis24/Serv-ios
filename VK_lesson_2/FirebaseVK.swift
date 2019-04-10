@@ -1,5 +1,4 @@
 
-
 import Foundation
 import Firebase
 import FirebaseDatabase
@@ -38,22 +37,22 @@ class FirebaseVK {
     
     static func addLoginDatabase(_ user: User) {
         let dataRef = Database.database().reference()
-        dataRef.child(String(Session.shared.userId)).child("\(user.id)").setValue(user.toAnyObject)
+        dataRef.child(String(Session.instance.userId)).child("\(user.id)").setValue(user.toAnyObject)
     }
     
-    static func addGroup(user: String, groups: [Group]){
+    static func addGroup(user: String, group: Group){
         let dataRef = Database.database().reference()
-        dataRef.child(String(Session.shared.userId)).child(user).updateChildValues(["groups":groups.map{$0.toAnyObject}])
+        dataRef.child("\(String(Session.instance.userId))/addGroup").child("\(group.id)").setValue(group.toAnyObject)
     }
     
-    static func checkedGroups (group: Group) {
-        let ref = Database.database().reference()
-        ref.child("\(String(Session.shared.userId))/addGroup").updateChildValues([String(group.id): group.name])
-    }
+//    static func checkedGroups (group: Group) {
+//        let ref = Database.database().reference()
+//        ref.child("\(String(Session.instance.userId))/addGroup").updateChildValues([String(group.id): group.name])
+//    }
     
     static func searchStory (searchText: String) {
         let ref = Database.database().reference()
-        ref.child("\(String(Session.shared.userId))/story").updateChildValues([String(format: "%0.f", Date().timeIntervalSinceReferenceDate): searchText])
+        ref.child("\(String(Session.instance.userId))/story").updateChildValues([String(format: "%0.f", Date().timeIntervalSinceReferenceDate): searchText])
     }
     
 }

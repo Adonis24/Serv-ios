@@ -39,9 +39,24 @@ class VKLoginController: UIViewController {
     }
     
     @IBAction func exitButtom(_ sender: Any) {
-      exit(0)
+     // exit(0)
+        if let exit = navigationController {
+            exit.popViewController(animated: true)
+            do {
+                // 1
+                try Auth.auth().signOut()
+                self.dismiss(animated: true, completion: nil)
+            } catch (let error) {
+                // 2
+                print("Auth sign out failed: \(error)")
+            }
+            
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
+   
     
     @IBAction func signUp(_ sender: UIButton) {
         
@@ -183,7 +198,7 @@ class VKLoginController: UIViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self,name: UIResponder.keyboardWillShowNotification,object:nil)
         NotificationCenter.default.removeObserver(self,name: UIResponder.keyboardWillHideNotification,object:nil)
-        
+            Auth.auth().removeStateDidChangeListener(handle)
     }
     
     

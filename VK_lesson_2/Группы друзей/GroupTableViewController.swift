@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import RealmSwift
 import Kingfisher
+import Firebase
+import FirebaseDatabase
 
 
 extension GroupTableViewController: UISearchResultsUpdating {
@@ -25,6 +27,17 @@ extension GroupTableViewController: UISearchResultsUpdating {
 //    }
 //}
 class GroupTableViewController: UITableViewController,UISearchBarDelegate {
+  
+    var vkService = VKService()
+    private var vk_Groups = [Group]()
+    // private var vk_GroupsRealm = [Group]()
+    private var vk_GroupsRealm: Results<Group>?
+    let searchController = UISearchController(searchResultsController: nil)
+    private var filteredAllGroups = [Group]()
+    var searchActive : Bool = false
+    var notificationToken: NotificationToken?
+    private var firebaseVK = [FirebaseVK]()
+    private let ref = Database.database().reference(withPath: "groups")
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -42,6 +55,9 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
                 // Добавляем группу в список
                 if !vk_Groups.contains{$0.id == group.id} {
                     vk_Groups.append(group)
+                   FirebaseVK.addGroup(user: String(Session.instance.userId), group: group)
+                                                                        
+                    
                     // Обновляем таблицу
                     tableView.reloadData()
                 }
@@ -51,18 +67,36 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
         
     }
     
+//    let alertVC = UIAlertController(title: "Enter a city name please", message: nil, preferredStyle: .alert)
+//
+//    let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+//        guard let textField = alertVC.textFields?.first,
+//            let cityname = textField.text else { return }
+//
+//        // 1
+//        let city = FirebaseCity(name: cityname,
+//                                zipcode: Int.random(in: 100000...999999))
+//        // 2
+//        let cityRef = self.ref.child(cityname.lowercased())
+//
+//        cityRef.setValue(city.toAnyObject())
+//    }
+//
+//    let cancelAction = UIAlertAction(title: "Cancel",
+//                                     style: .cancel)
+//
+//    alertVC.addTextField()
+//
+//    alertVC.addAction(saveAction)
+//    alertVC.addAction(cancelAction)
+//
+//    present(alertVC, animated: true, completion: nil)
+    
     /* статические данные для теста
     var nameGroups   = ["Актеры","Композиторы","Автомобили"]
     var groups = ["Актеры":"Actors","Композиторы":"Composers","Автомобили":"Сars"]
     */
-    var vkService = VKService()
-    private var vk_Groups = [Group]()
-    // private var vk_GroupsRealm = [Group]()
-    private var vk_GroupsRealm: Results<Group>?
-    let searchController = UISearchController(searchResultsController: nil)
-    private var filteredAllGroups = [Group]()
-    var searchActive : Bool = false
-    var notificationToken: NotificationToken?
+
     
     @IBAction func apiGroups(_ sender: Any) {
         getGroups()
@@ -195,10 +229,24 @@ class GroupTableViewController: UITableViewController,UISearchBarDelegate {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            vk_Groups.remove(at: indexPath.row)
-            //vk_GroupsRealm?.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+//            // Delete the row from the data source
+//            vk_Groups.remove(at: indexPath.row)
+//            //vk_GroupsRealm?.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            let gr = vk_GroupsRealm?[indexPath.row]
+            vkService.deleteGroups(for: gr!.id){ [weak self] groups, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                } else if let groups = groups, let self = self {
+                    
+                    RealmProvider.save(items: groups)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+            RealmProvider.delete([gr!])
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }

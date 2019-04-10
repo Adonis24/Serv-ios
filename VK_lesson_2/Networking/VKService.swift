@@ -96,6 +96,26 @@ class VKService {
             }
         }
     }
+    func deleteGroups(for group_id: Int, completion: (([Group]?, Error?) -> Void)? = nil) {
+        let path = "/method/groups.leave"
+        let params: Parameters = [
+            "access_token" : Session.instance.token,
+            "group_id" : group_id,
+            "v": "5.85"
+        ]
+        VKService.sharedManager.request(baseUrl+path, method: .get, parameters: params).responseJSON { response in
+            
+            switch response.result {
+                
+            case .success(let value):
+                let json = JSON(value)
+                let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
+                completion?(groups, nil)
+            case .failure(let error):
+                completion?(nil, error)
+            }
+        }
+    }
     public func  searchGroup(searchText: String, completion: (([Group]?, Error?) -> Void)? = nil)  {
         
         let path = "/method/groups.search"

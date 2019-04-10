@@ -121,7 +121,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pqj-zQ-XEh"/>
+                                            <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zu2-nl-ch8"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -145,7 +145,6 @@
                                     <constraint firstItem="WRy-ff-8x3" firstAttribute="top" secondItem="R32-dU-Jf2" secondAttribute="bottom" constant="23" id="WC5-pq-IWF"/>
                                     <constraint firstAttribute="trailing" secondItem="jDv-n8-tsj" secondAttribute="trailing" constant="45" id="Ysj-Dt-Ik6"/>
                                     <constraint firstItem="jDv-n8-tsj" firstAttribute="top" secondItem="WRy-ff-8x3" secondAttribute="bottom" constant="30" id="bOB-sM-DbQ"/>
-                                    <constraint firstAttribute="height" constant="647" id="cEv-49-yys"/>
                                     <constraint firstItem="opl-Qp-IYj" firstAttribute="top" secondItem="S9U-E1-cib" secondAttribute="bottom" constant="45" id="e40-VP-hwU"/>
                                     <constraint firstItem="887-3a-Pws" firstAttribute="leading" secondItem="C44-Z0-J5v" secondAttribute="leading" id="eIF-C7-rlM"/>
                                     <constraint firstAttribute="trailing" secondItem="ppu-VV-dPe" secondAttribute="trailing" constant="45" id="gKw-Mt-WfI"/>
@@ -176,7 +175,6 @@
                     <connections>
                         <outlet property="loginInput" destination="R32-dU-Jf2" id="Kl5-2A-8Sm"/>
                         <outlet property="passwordInput" destination="jDv-n8-tsj" id="J0q-Mz-ffZ"/>
-                        <outlet property="signUP" destination="5NF-UQ-QUc" id="xcJ-qp-2MY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

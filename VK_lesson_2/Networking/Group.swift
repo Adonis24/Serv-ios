@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
-class Group: Object, Codable  {
+class Group: Object  {
 
     
          @objc dynamic var id: Int = 0
@@ -30,5 +30,13 @@ class Group: Object, Codable  {
     }
     override static func primaryKey() -> String? {
         return "id"
+    }
+    var toAnyObject: Any {
+        return [
+            "name": name,
+            "photo_50": photo_50,
+            "id": id
+            
+        ]
     }
 }

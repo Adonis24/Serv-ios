@@ -38,6 +38,23 @@ class RealmProvider{
     return nil
     
 }
+    
+    static func delete<T: Object>(_ items: [T],
+                                  config: Realm.Configuration = Realm.Configuration.defaultConfiguration) {
+        
+        do{
+            let realm = try Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
+            
+            try? realm.write {
+                realm.delete(items)
+            }
+        }
+            
+        catch {
+            print(error)
+        }
+      
+    }
     static func savePhotoForUser(_ photos: [Photo],
                                  id: Int,
                                  config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
