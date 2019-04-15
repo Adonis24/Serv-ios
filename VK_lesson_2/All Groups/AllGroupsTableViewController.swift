@@ -9,8 +9,8 @@
 import UIKit
 import Alamofire
 import RealmSwift
-import FirebaseDatabase
-import Firebase
+//import FirebaseDatabase
+//import Firebase
 
 extension AllGroupsTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
@@ -40,31 +40,31 @@ class AllGroupsTableViewController: UITableViewController,UISearchBarDelegate {
     var filteredAllGroups = [Group]() 
     var searchActive : Bool = false
     var notificationToken: NotificationToken?
-    private var firebaseVK = [FirebaseVK]()
-    private let ref = Database.database().reference(withPath: "Allroups")
+//    private var firebaseVK = [FirebaseVK]()
+//    private let ref = Database.database().reference(withPath: "Allroups")
     
     override func viewDidLoad() {
-         observeFirebaseGroups()
+        // observeFirebaseGroups()
         super.viewDidLoad()
     }
     
-    func observeFirebaseGroups() {
-        ref.observe(DataEventType.value) { snapshot in
-            var groups: [FirebaseVK] = []
-            
-            for child in snapshot.children {
-                guard let snapshot = child as? DataSnapshot,
-                    let group = FirebaseVK(snapshot: snapshot) else { continue }
-                
-                groups.append(group)
-            }
-            
-            self.firebaseVK = groups
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+//    func observeFirebaseGroups() {
+//        ref.observe(DataEventType.value) { snapshot in
+//            var groups: [FirebaseVK] = []
+//
+//            for child in snapshot.children {
+//                guard let snapshot = child as? DataSnapshot,
+//                    let group = FirebaseVK(snapshot: snapshot) else { continue }
+//
+//                groups.append(group)
+//            }
+//
+//            self.firebaseVK = groups
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
     func searchGroup()  {
         
         let url = "https://api.vk.com"
